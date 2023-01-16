@@ -1,6 +1,6 @@
 package com.example.bime
 
-class Category(val id: Int? = null, var name: String? = "", var colour: String? = "") {
+class Category(val id: Int, var name: String = "", var colour: String = "#FFFFFF") {
     override fun toString(): String {
         return "Category_id: ${id}, Category_name: ${name}, Category_colour: ${colour}";
     }
