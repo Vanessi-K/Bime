@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboard">
+
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="com.example.bime.Dashboard"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_weeklyOverview2"
+            app:destination="@id/weeklyOverview" />
+        <action
+            android:id="@+id/action_dashboard_to_editEntry"
+            app:destination="@id/editEntry" />
+        <action
+            android:id="@+id/action_dashboard_to_addEntry"
+            app:destination="@id/addEntry" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/weeklyOverview"
+        android:name="com.example.bime.WeeklyOverview"
+        android:label="fragment_weekly_overview"
+        tools:layout="@layout/fragment_weekly_overview">
+        <action
+            android:id="@+id/action_weeklyOverview_to_addEntry"
+            app:destination="@id/addEntry" />
+        <action
+            android:id="@+id/action_weeklyOverview_to_editEntry"
+            app:destination="@id/editEntry" />
+        <action
+            android:id="@+id/action_weeklyOverview_to_dashboard"
+            app:destination="@id/dashboard" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addEntry"
+        android:name="com.example.bime.AddEntry"
+        android:label="fragment_add_entry"
+        tools:layout="@layout/fragment_add_entry">
+        <action
+            android:id="@+id/action_addEntry_to_dashboard"
+            app:destination="@id/dashboard" />
+        <action
+            android:id="@+id/action_addEntry_to_weeklyOverview"
+            app:destination="@id/weeklyOverview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editEntry"
+        android:name="com.example.bime.EditEntry"
+        android:label="fragment_edit_entry"
+        tools:layout="@layout/fragment_edit_entry">
+        <action
+            android:id="@+id/action_editEntry_to_dashboard"
+            app:destination="@id/dashboard" />
+        <action
+            android:id="@+id/action_editEntry_to_weeklyOverview"
+            app:destination="@id/weeklyOverview" />
+    </fragment>
+
+</navigation>
