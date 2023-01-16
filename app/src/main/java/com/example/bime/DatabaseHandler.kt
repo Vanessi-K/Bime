@@ -127,18 +127,18 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
     //region entry
 
-    fun insertEntry(categoryId: Int, day: Int, timeH: Float) {
+    fun insertEntry(category: Int, day: Int, time: Float) {
         val db = this.writableDatabase
 
         val ctv = ContentValues()
-        ctv.put(category_id, categoryId)
+        ctv.put(category_id, category)
         ctv.put(entry_day, day)
-        ctv.put(entry_time_h, timeH)
+        ctv.put(entry_time_h, time)
         db.insert(entry_table, null, ctv)
     }
 
     fun insertEntry(entry: Entry) {
-        insertEntry(entry.categoryId, entry.day, entry.timeH)
+        insertEntry(entry.category, entry.day, entry.time)
     }
 
     fun getAllEntries(): MutableList<Entry> {
@@ -149,15 +149,15 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
         while(cursor.moveToNext()) {
             val indexId = cursor.getColumnIndex(entry_id)
-            val indexCategoryId = cursor.getColumnIndex(category_id)
+            val indexCategory = cursor.getColumnIndex(category_id)
             val indexDay = cursor.getColumnIndex(entry_day)
-            val indexTimeH = cursor.getColumnIndex(entry_time_h)
+            val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
                 cursor.getInt(indexId),
-                cursor.getInt(indexCategoryId),
+                cursor.getInt(indexCategory),
                 cursor.getInt(indexDay),
-                cursor.getFloat(indexTimeH)
+                cursor.getFloat(indexTime)
             )
             allEntries.add(entry)
         }
@@ -173,15 +173,15 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
         while(cursor.moveToNext()) {
             val indexId = cursor.getColumnIndex(entry_id)
-            val indexCategoryId = cursor.getColumnIndex(category_id)
+            val indexCategory = cursor.getColumnIndex(category_id)
             val indexDay = cursor.getColumnIndex(entry_day)
-            val indexTimeH = cursor.getColumnIndex(entry_time_h)
+            val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
                 cursor.getInt(indexId),
-                cursor.getInt(indexCategoryId),
+                cursor.getInt(indexCategory),
                 cursor.getInt(indexDay),
-                cursor.getFloat(indexTimeH)
+                cursor.getFloat(indexTime)
             )
             allEntries.add(entry)
         }
@@ -201,15 +201,15 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
         while(cursor.moveToNext()) {
             val indexId = cursor.getColumnIndex(entry_id)
-            val indexCategoryId = cursor.getColumnIndex(category_id)
+            val indexCategory = cursor.getColumnIndex(category_id)
             val indexDay = cursor.getColumnIndex(entry_day)
-            val indexTimeH = cursor.getColumnIndex(entry_time_h)
+            val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
                 cursor.getInt(indexId),
-                cursor.getInt(indexCategoryId),
+                cursor.getInt(indexCategory),
                 cursor.getInt(indexDay),
-                cursor.getFloat(indexTimeH)
+                cursor.getFloat(indexTime)
             )
             allEntries.add(entry)
         }
@@ -217,23 +217,23 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
         return allEntries
     }
 
-    fun getEntriesByCategory(categoryId: Int): MutableList<Entry> {
+    fun getEntriesByCategory(category: Int): MutableList<Entry> {
         val db = this.writableDatabase
 
-        val cursor = db.rawQuery("SELECT * FROM $entry_table WHERE $category_id = $categoryId", null)
+        val cursor = db.rawQuery("SELECT * FROM $entry_table WHERE $category_id = $category", null)
         val allEntries: MutableList<Entry> = mutableListOf()
 
         while(cursor.moveToNext()) {
             val indexId = cursor.getColumnIndex(entry_id)
-            val indexCategoryId = cursor.getColumnIndex(category_id)
+            val indexCategory = cursor.getColumnIndex(category_id)
             val indexDay = cursor.getColumnIndex(entry_day)
-            val indexTimeH = cursor.getColumnIndex(entry_time_h)
+            val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
                 cursor.getInt(indexId),
-                cursor.getInt(indexCategoryId),
+                cursor.getInt(indexCategory),
                 cursor.getInt(indexDay),
-                cursor.getFloat(indexTimeH)
+                cursor.getFloat(indexTime)
             )
             allEntries.add(entry)
         }
@@ -250,18 +250,18 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
         deleteEntry(entry.id)
     }
 
-    fun updateEntry(id: Int, categoryId: Int, day: Int, timeH: Float) {
+    fun updateEntry(id: Int, category: Int, day: Int, time: Float) {
         val db = this.writableDatabase
 
         val ctv = ContentValues()
-        ctv.put(category_id, categoryId)
+        ctv.put(category_id, category)
         ctv.put(entry_day, day)
-        ctv.put(entry_time_h, timeH)
+        ctv.put(entry_time_h, time)
         db.update(entry_table, ctv, "$entry_id = $id", null)
     }
 
     fun updateEntry(entry: Entry) {
-        updateEntry(entry.id, entry.categoryId, entry.day, entry.timeH)
+        updateEntry(entry.id, entry.category, entry.day, entry.time)
     }
 
     //endregion
