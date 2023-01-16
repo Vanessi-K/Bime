@@ -1,12 +1,13 @@
 package com.example.bime
 
-import java.sql.Date
+import android.content.Context
+import java.time.LocalDate
 
-class Day(var day: Date? = null) {
+class Day(var day: LocalDate, private val context: Context?) {
 
-    val db = DatabaseHandler(this.activity)
+    val db = DatabaseHandler(context);
 
-    val listOfEntries get() = db.getEntriesByDay(day)
+    val listOfEntries get() = db.getEntriesByDate(day)
 
     override fun toString(): String {
         return "Day_date: ${day}, Day_listOfDays: ${listOfEntries}";

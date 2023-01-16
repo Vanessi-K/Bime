@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {
 
@@ -19,20 +21,28 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
         private const val entry_time_h = "entry_time_h"
     }
 
+    fun dateToSqlDate(date: LocalDate): String {
+        return date.toString()
+    }
+
+    fun sqlDateToDate(date: String): LocalDate {
+        return LocalDate.parse(date)
+    }
+
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("CREATE TABLE IF NOT EXISTS $category_table(" +
                 "$category_id INTEGER PRIMARY KEY, " +
                 "$category_name VARCHAR(255), " +
                 "$category_colour VARCHAR(7));")
 
-        insertCategory("Busy time", "#84D1FC");
-        insertCategory("Free time", "#FF8C00");
-
         db?.execSQL("CREATE TABLE IF NOT EXISTS $entry_table(" +
                 "$entry_id INTEGER PRIMARY KEY, " +
                 "$category_id INTEGER, " +
-                "$entry_day INTEGER, " +
-                "$entry_time_h FLOAT);")
+                "$entry_day DATETIME, " +
+                "$entry_time_h DOUBLE);")
+
+        insertCategory(Category(1, "Busy time", "#84D1FC"),db)
+        insertCategory(Category(2, "Free time", "#FF8C00"),db)
 
     }
 
@@ -44,8 +54,9 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
     //region category
 
-    fun insertCategory(name: String, colour: String) {
-        val db = this.writableDatabase
+    fun insertCategory(name: String, colour: String, db: SQLiteDatabase? = null) {
+
+        val db = db ?: this.writableDatabase
 
         val ctv = ContentValues()
         ctv.put(category_name, name)
@@ -53,8 +64,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
         db.insert(category_table, null, ctv)
     }
 
-    fun insertCategory(category: Category) {
-        insertCategory(category.name, category.colour)
+    fun insertCategory(category: Category, db: SQLiteDatabase?) {
+        insertCategory(category.name, category.colour, db)
     }
 
     fun getAllCategories(): MutableList<Category> {
@@ -127,18 +138,18 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
     //region entry
 
-    fun insertEntry(category: Int, day: Int, time: Float) {
+    fun insertEntry(category: Int, day: LocalDate?, time: Double) {
         val db = this.writableDatabase
 
         val ctv = ContentValues()
         ctv.put(category_id, category)
-        ctv.put(entry_day, day)
+        ctv.put(entry_day, day?.let { dateToSqlDate(it) })
         ctv.put(entry_time_h, time)
         db.insert(entry_table, null, ctv)
     }
 
     fun insertEntry(entry: Entry) {
-        insertEntry(entry.category, entry.day, entry.time)
+        entry.category?.let { insertEntry(it, entry.day, entry.time) }
     }
 
     fun getAllEntries(): MutableList<Entry> {
@@ -156,8 +167,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val entry = Entry(
                 cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
-                cursor.getInt(indexDay),
-                cursor.getFloat(indexTime)
+                cursor.getDouble(indexTime),
+                sqlDateToDate(cursor.getString(indexDay))
             )
             allEntries.add(entry)
         }
@@ -180,8 +191,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val entry = Entry(
                 cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
-                cursor.getInt(indexDay),
-                cursor.getFloat(indexTime)
+                cursor.getDouble(indexTime),
+                sqlDateToDate(cursor.getString(indexDay))
             )
             allEntries.add(entry)
         }
@@ -190,10 +201,10 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
     }
 
     fun getEntryById(entry: Entry) {
-        getEntryById(entry.id)
+        entry.id?.let { getEntryById(it) }
     }
 
-    fun getEntriesByDate(day: Int): MutableList<Entry> {
+    fun getEntriesByDate(day: LocalDate): MutableList<Entry> {
         val db = this.writableDatabase
 
         val cursor = db.rawQuery("SELECT * FROM $entry_table WHERE $entry_day = $day", null)
@@ -208,8 +219,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val entry = Entry(
                 cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
-                cursor.getInt(indexDay),
-                cursor.getFloat(indexTime)
+                cursor.getDouble(indexTime),
+                sqlDateToDate(cursor.getString(indexDay))
             )
             allEntries.add(entry)
         }
@@ -232,8 +243,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val entry = Entry(
                 cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
-                cursor.getInt(indexDay),
-                cursor.getFloat(indexTime)
+                cursor.getDouble(indexTime),
+                sqlDateToDate(cursor.getString(indexDay))
             )
             allEntries.add(entry)
         }
@@ -247,21 +258,21 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
     }
 
     fun deleteEntry(entry: Entry) {
-        deleteEntry(entry.id)
+        entry.id?.let { deleteEntry(it) }
     }
 
-    fun updateEntry(id: Int, category: Int, day: Int, time: Float) {
+    fun updateEntry(id: Int, category: Int, day: LocalDate, time: Double) {
         val db = this.writableDatabase
 
         val ctv = ContentValues()
         ctv.put(category_id, category)
-        ctv.put(entry_day, day)
+        ctv.put(entry_day, dateToSqlDate(day))
         ctv.put(entry_time_h, time)
         db.update(entry_table, ctv, "$entry_id = $id", null)
     }
 
     fun updateEntry(entry: Entry) {
-        updateEntry(entry.id, entry.category, entry.day, entry.time)
+        entry.category?.let { entry.id?.let { it1 -> updateEntry(it1, it, entry.day, entry.time) } }
     }
 
     //endregion
