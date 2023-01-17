@@ -1,135 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp">
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintBottom_toTopOf="@id/coordinator"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/headline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Add new activity"
-            app:layout_constraintBottom_toTopOf="@id/subline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/subline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Log a new busy time or free time activity."
-            app:layout_constraintBottom_toBottomOf="@id/calender_headline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headline" />
-
-        <TextView
-            android:id="@+id/calender_headline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Choose a date"
-            app:layout_constraintBottom_toTopOf="@id/calendarView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subline" />
-
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calender_headline"
-            tools:layout_editor_absoluteX="135dp"
-            tools:layout_editor_absoluteY="459dp" />
-
-        <TextView
-            android:id="@+id/hour_input_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Duration (in hours)"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calendarView" />
-
-        <EditText
-            android:id="@+id/hour_input_field"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/hour_input_label" />
-
-        <TextView
-            android:id="@+id/select_type_headline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Select Type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/hour_input_field" />
-
-        <RadioGroup
-            android:id="@+id/radio_group"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/select_type_headline">
+            android:layout_marginBottom="24dp">
 
-            <RadioButton
-                android:id="@+id/radio_busy_time"
+            <ImageView
+                android:id="@+id/back_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="Busy Time" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
-            <RadioButton
-                android:id="@+id/radio_free_time"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/headline"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Free Time" />
-        </RadioGroup>
+                android:layout_marginTop="12dp"
+                android:text="Add new activity"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="23sp"
+                app:layout_constraintBottom_toTopOf="@id/subline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/back_arrow" />
 
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Cancel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+            <TextView
+                android:id="@+id/subline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Log a new busy time or free time activity."
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/calender_headline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headline" />
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cancel_button"
-            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+            <TextView
+                android:id="@+id/calender_headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Choose a date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@id/calendarView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subline" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="0dp"
+                android:layout_height="260dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calender_headline" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+            <TextView
+                android:id="@+id/hour_input_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Duration (in hours)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendarView" />
+
+            <EditText
+                android:id="@+id/hour_input_field"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_border"
+                android:inputType="numberDecimal"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hour_input_label" />
+
+            <TextView
+                android:id="@+id/select_type_headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Select Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hour_input_field" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/cancel_button"
+                app:layout_constraintTop_toBottomOf="@id/select_type_headline">
+
+                <RadioButton
+                    android:id="@+id/radio_busy_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:buttonTint="@color/blue_500"
+                    android:checked="true"
+                    android:text="Busy Time"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/radio_free_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/orange_500"
+                    android:checked="false"
+                    android:text="Free Time"
+                    android:textSize="12sp" />
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_button"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="32dp"
+                android:text="Cancel"
+                android:textColor="@color/orange_500"
+                android:textSize="15sp"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radio_group"
+                app:strokeColor="@color/orange_500"
+                app:strokeWidth="2dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_button"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:backgroundTint="@color/orange_500"
+                app:cornerRadius="4dp"
+                app:layout_constraintStart_toEndOf="@id/cancel_button"
+                app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:fabCradleMargin="0dp"
-        app:fabCradleRoundedCornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_app_bar_menu" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_app_bar"
+            style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabCradleMargin="0dp"
+            app:fabCradleRoundedCornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_app_bar_menu" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
