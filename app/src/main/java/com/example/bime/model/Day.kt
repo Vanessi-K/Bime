@@ -11,7 +11,7 @@ class Day(var day: LocalDate, private val context: Context?) {
     val listOfEntries get() = db.getEntriesByDate(day)
 
     override fun toString(): String {
-        return "Day_date: ${day}, Day_listOfDays: ${listOfEntries}";
+        return "Day_date: ${day}, Day_listOfEntries: ${listOfEntries}";
     }
 
     fun timePerDay(): Double {
@@ -24,8 +24,11 @@ class Day(var day: LocalDate, private val context: Context?) {
     }
 
     fun timePerCategory(category: Int): Double {
+        println("timePerCategory")
+        println("size list of entries: " + listOfEntries.size)
         var time = 0.0
         for (i in listOfEntries) {
+            println("entry: ${i}")
             if (i.category == category) {
                 time += i.time!!
             }

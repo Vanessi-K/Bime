@@ -1,27 +1,32 @@
 package com.example.bime.model
 
 import android.content.Context
+import android.graphics.Color
+import com.example.bime.CustomBarChart
 import com.example.bime.DatabaseHandler
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarEntry
 import java.time.LocalDate
 
-class Timerange(var startDay: LocalDate, var timerange: Int, private val context: Context) {
+class Timerange(var startDay: LocalDate, var timerange: Int, private val context: Context?) {
 
     val db = DatabaseHandler(this.context)
 
-    val listOfEntriesInRange : MutableList<Day> = mutableListOf()
+    val allCategories = db.getAllCategories()
+    val listOfDaysInRange : MutableList<Day> = mutableListOf()
     init {
         for(i in 0..timerange) {
-            listOfEntriesInRange.add(Day(startDay.plusDays(i.toLong()), context))
+            listOfDaysInRange.add(Day(startDay.plusDays(i.toLong()), context))
         }
     }
 
     override fun toString(): String {
-        return "Timerange_startDay: ${startDay}, Timerange_timerange: ${timerange}, Timerange_listOfDaysInRange: ${listOfEntriesInRange}";
+        return "Timerange_startDay: ${startDay}, Timerange_timerange: ${timerange}, Timerange_listOfDaysInRange: ${listOfDaysInRange}";
     }
 
     fun timePerCategory(category: Int): Double {
         var time = 0.0
-        for (day in listOfEntriesInRange) {
+        for (day in listOfDaysInRange) {
             time+=day.timePerCategory(category)
         }
 
@@ -30,10 +35,52 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
 
     fun timePerTimerange(): Double {
         var time = 0.0
-        for (day in listOfEntriesInRange) {
+        for (day in listOfDaysInRange) {
             time+=day.timePerDay()
         }
 
         return time
+    }
+
+    fun createBarChart(barChart: BarChart) {
+        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours())
+    }
+
+    private fun generateBarEntries(): ArrayList<BarEntry> {
+        val entries = ArrayList<BarEntry>()
+        var index = 0
+        for (day in listOfDaysInRange) {
+            val dayValueArrayByCategory = FloatArray(allCategories.size) { 0.0f }
+
+            for(categoryIndex in allCategories.indices) {
+                val category = allCategories[categoryIndex]
+                val timePerCategory = day.timePerCategory(category.id).toFloat()
+                println(day)
+                println(category.id)
+                println(timePerCategory)
+                dayValueArrayByCategory[categoryIndex] = timePerCategory;
+            }
+            entries.add(BarEntry(index.toFloat(), dayValueArrayByCategory))
+            index++
+        }
+        return entries
+    }
+
+    private fun getCategoryLabels(): Array<String> {
+        val categoryLabelsArray = Array<String>(allCategories.size) { "undefined" }
+
+        for (categoryIndex in allCategories.indices) {
+            categoryLabelsArray[categoryIndex] = allCategories[categoryIndex].name
+        }
+        return categoryLabelsArray;
+    }
+
+    private fun getCategoryColours(): Array<Int> {
+        val categoryColorsArray = Array<Int>(allCategories.size) { 0 }
+
+        for (categoryIndex in allCategories.indices) {
+            categoryColorsArray[categoryIndex] = Color.parseColor(allCategories[categoryIndex].colour)
+        }
+        return categoryColorsArray;
     }
 }

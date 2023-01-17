@@ -1,16 +1,11 @@
 package com.example.bime
 
 import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 
-class HourFormatter : ValueFormatter() {
-
-    override fun getPieLabel(value: Float, pieEntry: PieEntry?): String {
-        return "$value h"
-    }
-
+class WeekFormatter : ValueFormatter() {
+    private val days = arrayOf("Mo", "Tu", "Wed", "Th", "Fr", "Sa", "Su")
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-        return "$value h"
+        return days.getOrNull(value.toInt()) ?: value.toString()
     }
 }
