@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.bime.model.Category
 import com.example.bime.model.Entry
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {
 
@@ -27,6 +28,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
     }
 
     fun sqlDateToDate(date: String): LocalDate {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy")
+        println(date)
         return LocalDate.parse(date)
     }
 
