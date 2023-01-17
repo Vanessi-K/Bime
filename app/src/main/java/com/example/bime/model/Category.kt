@@ -1,4 +1,4 @@
-package com.example.bime
+package com.example.bime.model
 
 class Category(val id: Int, var name: String = "", var colour: String = "#FFFFFF") {
     override fun toString(): String {

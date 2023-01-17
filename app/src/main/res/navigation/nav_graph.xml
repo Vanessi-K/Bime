@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboard"
-        android:name="com.example.bime.Dashboard"
+        android:name="com.example.bime.fragments.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/weeklyOverview"
-        android:name="com.example.bime.WeeklyOverview"
+        android:name="com.example.bime.fragments.AddEntryFragment"
         android:label="fragment_weekly_overview"
         tools:layout="@layout/fragment_weekly_overview">
         <action
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/addEntry"
-        android:name="com.example.bime.AddEntry"
+        android:name="com.example.bime.fragments.AddEntryFragment"
         android:label="fragment_add_entry"
         tools:layout="@layout/fragment_add_entry">
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/editEntry"
-        android:name="com.example.bime.EditEntry"
+        android:name="com.example.bime.fragments.EditEntryFragment"
         android:label="fragment_edit_entry"
         tools:layout="@layout/fragment_edit_entry">
         <action

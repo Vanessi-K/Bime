@@ -1,4 +1,4 @@
-package com.example.bime
+package com.example.bime.model
 
 import java.time.LocalDate
 
