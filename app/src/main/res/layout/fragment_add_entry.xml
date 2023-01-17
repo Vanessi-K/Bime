@@ -1,11 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Add Entry" />
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Add new activity"
+            app:layout_constraintBottom_toTopOf="@id/subline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/subline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Log a new busy time or free time activity."
+            app:layout_constraintBottom_toBottomOf="@id/calender_headline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headline" />
+
+        <TextView
+            android:id="@+id/calender_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Choose a date"
+            app:layout_constraintBottom_toTopOf="@id/calendarView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subline" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calender_headline"
+            tools:layout_editor_absoluteX="135dp"
+            tools:layout_editor_absoluteY="459dp" />
+
+        <TextView
+            android:id="@+id/hour_input_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Duration (in hours)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calendarView" />
+
+        <EditText
+            android:id="@+id/hour_input_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hour_input_label" />
+
+        <TextView
+            android:id="@+id/select_type_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Select Type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hour_input_field" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/select_type_headline">
+
+            <RadioButton
+                android:id="@+id/radio_busy_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Busy Time" />
+
+            <RadioButton
+                android:id="@+id/radio_free_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free Time" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cancel_button"
+            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="0dp"
+        app:fabCradleRoundedCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_app_bar_menu" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
