@@ -4,7 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import java.text.SimpleDateFormat
+import com.example.bime.model.Category
+import com.example.bime.model.Entry
 import java.time.LocalDate
 
 class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {

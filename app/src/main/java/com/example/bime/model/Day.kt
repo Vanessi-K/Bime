@@ -1,6 +1,7 @@
-package com.example.bime
+package com.example.bime.model
 
 import android.content.Context
+import com.example.bime.DatabaseHandler
 import java.time.LocalDate
 
 class Day(var day: LocalDate, private val context: Context?) {

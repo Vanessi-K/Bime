@@ -1,7 +1,7 @@
-package com.example.bime
+package com.example.bime.model
 
 import android.content.Context
-import java.sql.Date
+import com.example.bime.DatabaseHandler
 import java.time.LocalDate
 
 class Timerange(var startDay: LocalDate, var timerange: Int, private val context: Context) {
