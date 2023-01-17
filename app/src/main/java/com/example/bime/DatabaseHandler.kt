@@ -169,8 +169,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -193,8 +193,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -221,8 +221,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -245,8 +245,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -269,8 +269,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )

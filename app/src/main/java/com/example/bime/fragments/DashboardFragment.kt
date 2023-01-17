@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.bime.CustomPieChart
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.github.mikephil.charting.animation.Easing
@@ -16,8 +17,6 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 
 class DashboardFragment : Fragment() {
-
-    private lateinit var ourPieChart: PieChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,76 +33,33 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ourPieChart = view.findViewById<PieChart>(R.id.pieChart)
+        val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
         val db = DatabaseHandler(this.activity)
 
-        val entries = db.getAllEntries();
+        val entries = db.getAllEntries()
+        val categories = db.getAllCategories();
 
-        val entriesCategoryArray = Array<Int>(entries.size) { 0 }
-        val entriesTimeArray = Array<String>(entries.size) { "hey" }
+        val entriesTimeArray = Array<Double>(categories.size) { 0.0 }
+        val categoryLabelsArray = Array<String>(categories.size) { "undefined" }
+        val categoryColorArray = Array<Int>(categories.size) { 0 }
 
         var index = 0
-        for (entry in entries) {
-            entriesCategoryArray[index] = entry.category!!
-            entriesTimeArray[index] = entry.time.toString()
+        for (category in categories) {
+            categoryLabelsArray[index] = category.name
+            categoryColorArray[index] = Color.parseColor(category.colour);
+
+            for (entry in entries) {
+                if (entry.category == category.id) {
+                    println(entriesTimeArray[index])
+                    entriesTimeArray[index] += entry.time
+                    println(entriesTimeArray[index])
+                }
+                println(entry)
+            }
             index++
         }
 
-        populatePieChart(entriesCategoryArray, entriesTimeArray)
+        CustomPieChart(dashboardPieChart, entriesTimeArray, categoryLabelsArray, categoryColorArray)
     }
-
-    private fun populatePieChart(values: Array<Int>, labels: Array<String>) {
-        //an array to store the pie slices entry
-        val ourPieEntry = ArrayList<PieEntry>()
-        var i = 0
-
-        for (entry in values) {
-            //converting to float
-            var value = values[i].toFloat()
-            var label = labels[i]
-            //adding each value to the pieentry array
-            ourPieEntry.add(PieEntry(value, label))
-            i++
-        }
-
-        //assigning color to each slices
-        val pieShades: ArrayList<Int> = ArrayList()
-        pieShades.add(Color.parseColor("#0E2DEC"))
-        pieShades.add(Color.parseColor("#B7520E"))
-        pieShades.add(Color.parseColor("#5E6D4E"))
-        pieShades.add(Color.parseColor("#DA1F12"))
-
-        //add values to the pie dataset and passing them to the constructor
-        val ourSet = PieDataSet(ourPieEntry, "")
-        val data = PieData(ourSet)
-
-        //setting the slices divider width
-        ourSet.sliceSpace = 1f
-
-        //populating the colors and data
-        ourSet.colors = pieShades
-        ourPieChart.data = data
-        //setting color and size of text
-        data.setValueTextColor(Color.WHITE)
-        data.setValueTextSize(10f)
-
-        //add an animation when rendering the pie chart
-        ourPieChart.animateY(1400, Easing.EaseInOutQuad)
-        //disabling center hole
-        ourPieChart.isDrawHoleEnabled = false
-        //do not show description text
-        ourPieChart.description.isEnabled = false
-        //legend enabled and its various appearance settings
-        ourPieChart.legend.isEnabled = true
-        ourPieChart.legend.orientation = Legend.LegendOrientation.HORIZONTAL
-        ourPieChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        ourPieChart.legend.isWordWrapEnabled = true
-
-        //dont show the text values on slices e.g Antelope, impala etc
-        ourPieChart.setDrawEntryLabels(false)
-        //refreshing the chart
-        ourPieChart.invalidate()
-    }
-
 }
