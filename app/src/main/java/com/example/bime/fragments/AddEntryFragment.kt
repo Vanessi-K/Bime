@@ -7,20 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.classes.CheckCalendar
-import java.time.LocalDate
+import com.example.bime.classes.CheckRadioButtons
 
 class AddEntryFragment : Fragment() {
 
     lateinit var calendarCheck: CheckCalendar
-    var selectedCategory: String = "Busy Time"
+    lateinit var radioButtonCheck: CheckRadioButtons
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +36,7 @@ class AddEntryFragment : Fragment() {
 
         calendarCheck = CheckCalendar(view.findViewById(R.id.calendarView))
 
-        val radioGroup = view.findViewById<RadioGroup>(R.id.radio_group)
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            val radio: RadioButton = view.findViewById(checkedId)
-            selectedCategory = radio.text.toString()
-        }
+        radioButtonCheck = CheckRadioButtons(view.findViewById(R.id.radio_group), view.findViewById(R.id.radio_busy_time))
 
         var saveButton = view.findViewById<Button>(R.id.save_button)
 
@@ -72,7 +65,7 @@ class AddEntryFragment : Fragment() {
         val db = DatabaseHandler(this.activity)
         val day = calendarCheck.selectedDate()
         val time = view.findViewById<EditText>(R.id.hour_input_field).text.toString().toDouble()
-        val category = if (selectedCategory === "Busy Time") 1 else 2
+        val category = radioButtonCheck.selectedCategory()
 
         db.insertEntry(category, day, time)
     }
