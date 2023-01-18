@@ -64,10 +64,7 @@ class EditEntryFragment : Fragment() {
                 view.findViewById<RadioGroup>(R.id.radio_group).check(R.id.radio_free_time)
             }
 
-            view.findViewById<CalendarView>(R.id.calendarView).date =
-                entry.day.atStartOfDay().toInstant(
-                    ZoneOffset.UTC
-                ).toEpochMilli()
+            calendarCheck.setDate(entry.day)
         }
 
         saveButton.setOnClickListener { onEntryUpgrade() }

@@ -2,6 +2,7 @@ package com.example.bime.classes
 
 import android.widget.CalendarView
 import java.time.LocalDate
+import java.time.ZoneOffset
 
 class CheckCalendar(private val calendarView: CalendarView) {
 
@@ -15,6 +16,12 @@ class CheckCalendar(private val calendarView: CalendarView) {
 
     fun selectedDate() : LocalDate {
         return  selectedCalenderDate
+    }
+
+    fun setDate(day : LocalDate)  {
+        day.atStartOfDay().toInstant(
+            ZoneOffset.UTC
+        ).toEpochMilli()
     }
 
 }
