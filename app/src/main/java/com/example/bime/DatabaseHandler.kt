@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.bime.model.Category
 import com.example.bime.model.Entry
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {
 
@@ -27,6 +28,7 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
     }
 
     fun sqlDateToDate(date: String): LocalDate {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy")
         return LocalDate.parse(date)
     }
 
@@ -166,8 +168,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -190,8 +192,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -208,7 +210,7 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
     fun getEntriesByDate(day: LocalDate): MutableList<Entry> {
         val db = this.writableDatabase
 
-        val cursor = db.rawQuery("SELECT * FROM $entry_table WHERE $entry_day = ${dateToSqlDate(day)}", null)
+        val cursor = db.rawQuery("SELECT * FROM $entry_table WHERE $entry_day = \"${dateToSqlDate(day)}\"", null)
         val allEntries: MutableList<Entry> = mutableListOf()
 
         while(cursor.moveToNext()) {
@@ -218,32 +220,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
-                cursor.getDouble(indexTime),
-                sqlDateToDate(cursor.getString(indexDay))
-            )
-            allEntries.add(entry)
-        }
-        cursor.close()
-        return allEntries
-    }
-
-    fun getEntriesByTimerange(startDate: LocalDate, endDate: LocalDate): MutableList<Entry> {
-        val db = this.writableDatabase
-
-        val cursor = db.rawQuery("SELECT * FROM $entry_table WHERE $entry_day BETWEEN ${dateToSqlDate(startDate)} AND ${dateToSqlDate(endDate)}", null)
-        val allEntries: MutableList<Entry> = mutableListOf()
-
-        while(cursor.moveToNext()) {
-            val indexId = cursor.getColumnIndex(entry_id)
-            val indexCategory = cursor.getColumnIndex(category_id)
-            val indexDay = cursor.getColumnIndex(entry_day)
-            val indexTime = cursor.getColumnIndex(entry_time_h)
-
-            val entry = Entry(
                 cursor.getInt(indexId),
-                cursor.getInt(indexCategory),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
@@ -266,8 +244,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexTime = cursor.getColumnIndex(entry_time_h)
 
             val entry = Entry(
-                cursor.getInt(indexId),
                 cursor.getInt(indexCategory),
+                cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
                 sqlDateToDate(cursor.getString(indexDay))
             )
