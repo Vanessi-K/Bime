@@ -46,7 +46,11 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
     }
 
     fun createBarChart(barChart: BarChart) {
-        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours())
+        val endDay = startDay.plusDays(timerange.toLong())
+
+        val formatter = DateTimeFormatter.ofPattern("dd.MM");
+        val pieChartTitle = "${formatter.format(startDay)} - ${formatter.format(endDay)}"
+        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours(), pieChartTitle)
     }
 
     fun createPieChart(pieChart: PieChart) {
@@ -54,9 +58,8 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
         val endDay = startDay.plusDays(timerange.toLong())
         var prefix = if(endDay == LocalDate.now()) "Last " else ""
 
-        val formatter = DateTimeFormatter.ofPattern("dd.MM");
-
         val pieChartTitle = "$prefix $dayNumber days"
+        val formatter = DateTimeFormatter.ofPattern("dd.MM");
         val pieChartSubtitle = "${formatter.format(startDay)} - ${formatter.format(endDay)}"
         CustomPieChart(pieChart, generatePieEntries(), getCategoryLabels(), getCategoryColours(), pieChartTitle, pieChartSubtitle)
     }
