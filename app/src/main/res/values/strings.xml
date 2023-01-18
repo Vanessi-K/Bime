@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Bime</string>
+    <string name="add_activity">Add new <font color="#FF8C00">activity</font></string>
+    <string name="edit_activity">Edit <font color="#FF8C00">activity</font></string>
 </resources>

@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        supportActionBar?.hide()
         val db = DatabaseHandler(this)
 
 
@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 //        db.insertEntry(Entry(2,0, 4.5, LocalDate.of(2023,1,21)))
 //        db.insertEntry(Entry(1,0, 3.7, LocalDate.of(2023,1,22)))
 //        db.insertEntry(Entry(2,0, 2.5, LocalDate.of(2023,1,22)))
-
 
     }
 }
