@@ -16,13 +16,14 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 
 
-class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>) {
+class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>, title: String, subtitle: String) {
 
     init {
-        populatePieChart(pieChart, values, labels, colorSet)
+        val completeTitle = generateCenterSpannableText(title, subtitle);
+        populatePieChart(pieChart, values, labels, colorSet, completeTitle)
     }
 
-    private fun populatePieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>) {
+    private fun populatePieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>, title: SpannableString?) {
         //an array to store the pie slices entry
         val ourPieEntry = ArrayList<PieEntry>()
         var i = 0
@@ -47,7 +48,7 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
         data.setValueTextColor(Color.WHITE)
         data.setValueTextSize(20f)
 
-        pieChart.centerText = generateCenterSpannableText("Last 5 days", "day to day");
+        pieChart.centerText = title;
         pieChart.setDrawCenterText(true);
 
         pieChart.isDrawHoleEnabled = true

@@ -3,10 +3,13 @@ package com.example.bime.model
 import android.content.Context
 import android.graphics.Color
 import com.example.bime.CustomBarChart
+import com.example.bime.CustomPieChart
 import com.example.bime.DatabaseHandler
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.BarEntry
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class Timerange(var startDay: LocalDate, var timerange: Int, private val context: Context?) {
 
@@ -44,6 +47,28 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
 
     fun createBarChart(barChart: BarChart) {
         CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours())
+    }
+
+    fun createPieChart(pieChart: PieChart) {
+        val dayNumber = timerange + 1
+        val endDay = startDay.plusDays(timerange.toLong())
+        var prefix = if(endDay == LocalDate.now()) "Last " else ""
+
+        val formatter = DateTimeFormatter.ofPattern("dd.MM");
+
+        val pieChartTitle = "$prefix $dayNumber days"
+        val pieChartSubtitle = "${formatter.format(startDay)} - ${formatter.format(endDay)}"
+        CustomPieChart(pieChart, generatePieEntries(), getCategoryLabels(), getCategoryColours(), pieChartTitle, pieChartSubtitle)
+    }
+
+    private fun generatePieEntries(): Array<Double> {
+        val entriesByCategory = Array<Double>(allCategories.size){0.0}
+
+        for (categoryIndex in allCategories.indices) {
+            entriesByCategory[categoryIndex] = timePerCategory(allCategories[categoryIndex].id!!)
+        }
+
+        return entriesByCategory
     }
 
     private fun generateBarEntries(): ArrayList<BarEntry> {

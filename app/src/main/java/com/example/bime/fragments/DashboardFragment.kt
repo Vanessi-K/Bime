@@ -43,43 +43,8 @@ class DashboardFragment : Fragment() {
 
         val db = DatabaseHandler(this.activity)
 
-        val entries = db.getAllEntries()
-        val categories = db.getAllCategories();
-
-        val entriesTimeArray = Array<Double>(categories.size) { 0.0 }
-        val categoryLabelsArray = Array<String>(categories.size) { "undefined" }
-        val categoryColorArray = Array<Int>(categories.size) { 0 }
-
-        var index = 0
-        for (category in categories) {
-            categoryLabelsArray[index] = category.name
-            categoryColorArray[index] = Color.parseColor(category.colour);
-
-            for (entry in entries) {
-                if (entry.category == category.id) {
-                    println(entriesTimeArray[index])
-                    entriesTimeArray[index] += entry.time
-                    println(entriesTimeArray[index])
-                }
-                println(entry)
-            }
-            index++
-        }
-
-        CustomPieChart(dashboardPieChart, entriesTimeArray, categoryLabelsArray, categoryColorArray)
-
         val week = Timerange(LocalDate.of(2023, 1,16),6, this.activity)
         week.createBarChart(dashboardBarChart)
-
-        //CustomBarChart(dashboardBarChart, dataValues1(), "Hours", categoryColorArray)
-
-    }
-
-    private fun dataValues1(): ArrayList<BarEntry> {
-        var dataVals : ArrayList<BarEntry> = ArrayList<BarEntry>()
-        dataVals.add(BarEntry(0f, floatArrayOf(4f, 8f)))
-        dataVals.add(BarEntry(1f, floatArrayOf(1f, 9f)))
-        dataVals.add(BarEntry(3f, floatArrayOf(2f, 6f)))
-        return dataVals
+        week.createPieChart(dashboardPieChart)
     }
 }
