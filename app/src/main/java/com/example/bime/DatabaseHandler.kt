@@ -29,7 +29,6 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
 
     fun sqlDateToDate(date: String): LocalDate {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy")
-        println(date)
         return LocalDate.parse(date)
     }
 

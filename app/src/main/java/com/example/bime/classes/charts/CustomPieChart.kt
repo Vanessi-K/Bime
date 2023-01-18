@@ -1,4 +1,4 @@
-package com.example.bime
+package com.example.bime.classes.charts
 
 import android.graphics.Color
 import android.graphics.Typeface
@@ -12,8 +12,6 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 
 
 class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>, title: String, subtitle: String) {

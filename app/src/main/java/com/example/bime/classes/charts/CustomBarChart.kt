@@ -1,6 +1,5 @@
-package com.example.bime
+package com.example.bime.classes.charts
 
-import android.graphics.Color
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis

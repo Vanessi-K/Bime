@@ -2,8 +2,8 @@ package com.example.bime.model
 
 import android.content.Context
 import android.graphics.Color
-import com.example.bime.CustomBarChart
-import com.example.bime.CustomPieChart
+import com.example.bime.classes.charts.CustomBarChart
+import com.example.bime.classes.charts.CustomPieChart
 import com.example.bime.DatabaseHandler
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
@@ -83,9 +83,6 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
             for(categoryIndex in allCategories.indices) {
                 val category = allCategories[categoryIndex]
                 val timePerCategory = day.timePerCategory(category.id).toFloat()
-                println(day)
-                println(category.id)
-                println(timePerCategory)
                 dayValueArrayByCategory[categoryIndex] = timePerCategory;
             }
             entries.add(BarEntry(index.toFloat(), dayValueArrayByCategory))

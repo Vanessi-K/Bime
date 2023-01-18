@@ -1,24 +1,15 @@
 package com.example.bime.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.bime.CustomBarChart
-import com.example.bime.CustomPieChart
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.model.Timerange
-import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
 import java.time.LocalDate
 
 class DashboardFragment : Fragment() {

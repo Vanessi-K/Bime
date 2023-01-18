@@ -1,4 +1,4 @@
-package com.example.bime
+package com.example.bime.classes.charts
 
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.*

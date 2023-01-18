@@ -24,11 +24,8 @@ class Day(var day: LocalDate, private val context: Context?) {
     }
 
     fun timePerCategory(category: Int): Double {
-        println("timePerCategory")
-        println("size list of entries: " + listOfEntries.size)
         var time = 0.0
         for (i in listOfEntries) {
-            println("entry: ${i}")
             if (i.category == category) {
                 time += i.time!!
             }
