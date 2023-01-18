@@ -13,11 +13,13 @@ import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.classes.CheckCalendar
 import com.example.bime.classes.CheckRadioButtons
+import com.example.bime.classes.CheckTimeInput
 
 class AddEntryFragment : Fragment() {
 
     lateinit var calendarCheck: CheckCalendar
     lateinit var radioButtonCheck: CheckRadioButtons
+    lateinit var timeCheck: CheckTimeInput
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,22 +42,7 @@ class AddEntryFragment : Fragment() {
 
         var saveButton = view.findViewById<Button>(R.id.save_button)
 
-        var checkTime = view.findViewById<EditText>(R.id.hour_input_field)
-
-        checkTime.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-                var checkTimeContent = checkTime.text.toString()
-                saveButton.isEnabled = checkTimeContent != ""
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-        })
+        timeCheck = CheckTimeInput(view.findViewById(R.id.hour_input_field), saveButton)
 
         saveButton.setOnClickListener { onEntrySave(view) }
 
@@ -64,7 +51,7 @@ class AddEntryFragment : Fragment() {
     fun onEntrySave(view: View) {
         val db = DatabaseHandler(this.activity)
         val day = calendarCheck.selectedDate()
-        val time = view.findViewById<EditText>(R.id.hour_input_field).text.toString().toDouble()
+        val time = timeCheck.checkTimeInput()
         val category = radioButtonCheck.selectedCategory()
 
         db.insertEntry(category, day, time)
