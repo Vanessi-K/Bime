@@ -14,11 +14,12 @@ import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
+import com.example.bime.classes.CheckCalendar
 import java.time.LocalDate
 
 class AddEntryFragment : Fragment() {
 
-    var selectedCalenderDate: LocalDate = LocalDate.now()
+    lateinit var calendarCheck: CheckCalendar
     var selectedCategory: String = "Busy Time"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +37,7 @@ class AddEntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            selectedCalenderDate = LocalDate.of(year, month + 1, dayOfMonth)
-        }
+        calendarCheck = CheckCalendar(view.findViewById(R.id.calendarView))
 
         val radioGroup = view.findViewById<RadioGroup>(R.id.radio_group)
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -72,7 +70,7 @@ class AddEntryFragment : Fragment() {
 
     fun onEntrySave(view: View) {
         val db = DatabaseHandler(this.activity)
-        val day = selectedCalenderDate
+        val day = calendarCheck.selectedDate()
         val time = view.findViewById<EditText>(R.id.hour_input_field).text.toString().toDouble()
         val category = if (selectedCategory === "Busy Time") 1 else 2
 
