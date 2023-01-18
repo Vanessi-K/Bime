@@ -48,10 +48,11 @@ class EditEntryFragment : Fragment() {
         )
 
         var saveButton = view.findViewById<Button>(R.id.save_button)
+        var deleteButton = view.findViewById<Button>(R.id.delete_button)
 
         timeCheck = CheckTimeInput(view.findViewById(R.id.hour_input_field), saveButton)
 
-        val entry = db.getEntryById(25)
+        val entry = db.getEntryById(39)
 
         if (entry != null) {
             view.findViewById<EditText>(R.id.hour_input_field).setText(entry.time.toString())
@@ -69,17 +70,23 @@ class EditEntryFragment : Fragment() {
                 ).toEpochMilli()
         }
 
-        saveButton.setOnClickListener { onEntryUpgrade(view) }
+        saveButton.setOnClickListener { onEntryUpgrade() }
+        deleteButton.setOnClickListener { onEntryDelete() }
     }
 
-    fun onEntryUpgrade(view: View) {
+    fun onEntryUpgrade() {
         val db = DatabaseHandler(this.activity)
-        val id = 25
         val day = calendarCheck.selectedDate()
         val time = timeCheck.checkTimeInput()
         val category = radioButtonCheck.selectedCategory()
 
-        db.updateEntry(id, category, day, time)
+        db.updateEntry(39, category, day, time)
 
+    }
+
+    fun onEntryDelete() {
+        val db = DatabaseHandler(this.activity)
+
+        db.deleteEntry(39)
     }
 }
