@@ -46,7 +46,7 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
         pieChart.data = data
 
         data.setValueTextColor(Color.WHITE)
-        data.setValueTextSize(20f)
+        data.setValueTextSize(15f)
 
         pieChart.centerText = title;
         pieChart.setDrawCenterText(true);
@@ -63,8 +63,9 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
         pieChart.legend.orientation = Legend.LegendOrientation.HORIZONTAL
         pieChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         pieChart.legend.isWordWrapEnabled = true
-
         pieChart.legend.textSize = 15f
+
+        pieChart.isHighlightPerTapEnabled = false
 
         pieChart.setDrawEntryLabels(false)
         pieChart.invalidate()
