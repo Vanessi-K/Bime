@@ -9,7 +9,7 @@ import com.example.bime.model.Entry
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {
+class DatabaseHandler(val context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {
 
     companion object DataConfig {
         private const val dbName = "bime"
@@ -82,12 +82,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
             val indexName = cursor.getColumnIndex(category_name)
             val indexColour = cursor.getColumnIndex(category_colour)
 
-            val category = Category(
-                cursor.getInt(indexId),
-                cursor.getString(indexName),
-                cursor.getString(indexColour)
-            )
-            allCategories.add(category)
+            allCategories.add(Category(cursor.getInt(indexId), cursor.getString(indexName), cursor.getString(indexColour)))
+
         }
         cursor.close()
         return allCategories
@@ -96,6 +92,7 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
     fun getCategoryById(id: Int): Category? {
         val db = this.writableDatabase
 
+        println(id)
         val cursor = db.rawQuery("SELECT * FROM $category_table WHERE $category_id = $id", null)
         val allCategories: MutableList<Category> = mutableListOf()
 
@@ -171,7 +168,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
                 cursor.getInt(indexCategory),
                 cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
-                sqlDateToDate(cursor.getString(indexDay))
+                sqlDateToDate(cursor.getString(indexDay)),
+                context
             )
             allEntries.add(entry)
         }
@@ -195,7 +193,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
                 cursor.getInt(indexCategory),
                 cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
-                sqlDateToDate(cursor.getString(indexDay))
+                sqlDateToDate(cursor.getString(indexDay)),
+                context
             )
             allEntries.add(entry)
         }
@@ -223,7 +222,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
                 cursor.getInt(indexCategory),
                 cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
-                sqlDateToDate(cursor.getString(indexDay))
+                sqlDateToDate(cursor.getString(indexDay)),
+                context
             )
             allEntries.add(entry)
         }
@@ -247,7 +247,8 @@ class DatabaseHandler(context: Context?): SQLiteOpenHelper(context, dbName, null
                 cursor.getInt(indexCategory),
                 cursor.getInt(indexId),
                 cursor.getDouble(indexTime),
-                sqlDateToDate(cursor.getString(indexDay))
+                sqlDateToDate(cursor.getString(indexDay)),
+                context
             )
             allEntries.add(entry)
         }

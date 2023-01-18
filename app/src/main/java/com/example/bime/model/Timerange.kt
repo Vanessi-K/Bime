@@ -19,7 +19,9 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
     val listOfDaysInRange : MutableList<Day> = mutableListOf()
     init {
         for(i in 0..timerange) {
-            listOfDaysInRange.add(Day(startDay.plusDays(i.toLong()), context))
+            val day= Day(startDay.plusDays(i.toLong()), context)
+            println(day)
+            listOfDaysInRange.add(day)
         }
     }
 
@@ -33,6 +35,7 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
             time+=day.timePerCategory(category)
         }
 
+        println("$category - $time")
         return time
     }
 
@@ -67,7 +70,9 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
     private fun generatePieEntries(): Array<Double> {
         val entriesByCategory = Array<Double>(allCategories.size){0.0}
 
+        println("pieEntries")
         for (categoryIndex in allCategories.indices) {
+            println(categoryIndex)
             entriesByCategory[categoryIndex] = timePerCategory(allCategories[categoryIndex].id!!)
         }
 
