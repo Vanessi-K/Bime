@@ -59,7 +59,6 @@ class AddEntryFragment : Fragment() {
                                        before: Int, count: Int) {
                 var checkTimeContent = checkTime.text.toString()
                 saveButton.isEnabled = checkTimeContent != ""
-                println(checkTimeContent)
             }
 
             override fun afterTextChanged(p0: Editable?) {
