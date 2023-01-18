@@ -16,8 +16,8 @@ import java.time.LocalDate
 
 class AddEntryFragment : Fragment() {
 
-    var selectedCalenderDate: LocalDate? = LocalDate.now()
-    var selectedCategory: String? = "Busy Time"
+    var selectedCalenderDate: LocalDate = LocalDate.now()
+    var selectedCategory: String = "Busy Time"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +33,7 @@ class AddEntryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
