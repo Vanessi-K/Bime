@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/editEntry">
+    app:startDestination="@id/dashboard">
 
     <fragment
         android:id="@+id/startScreen"
@@ -14,7 +14,7 @@
             android:id="@+id/action_startScreen_to_dashboard"
             app:destination="@id/dashboard" />
     </fragment>
-
+    
     <fragment
         android:id="@+id/dashboard"
         android:name="com.example.bime.fragments.DashboardFragment"
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/weeklyOverview"
-        android:name="com.example.bime.fragments.AddEntryFragment"
+        android:name="com.example.bime.fragments.WeeklyOverviewFragment"
         android:label="fragment_weekly_overview"
         tools:layout="@layout/fragment_weekly_overview">
         <action
