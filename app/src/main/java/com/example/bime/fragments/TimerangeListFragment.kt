@@ -40,5 +40,9 @@ class TimerangeListFragment(val header: String = "", val timerange: Timerange? =
         }
 
         view.findViewById<TextView>(R.id.listHeader).text = header
+
+        view.findViewById<TextView>(R.id.newEntry).setOnClickListener{
+           println("Navigating to add entry")
+        }
     }
 }

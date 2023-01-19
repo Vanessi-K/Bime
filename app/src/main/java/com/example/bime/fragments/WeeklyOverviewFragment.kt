@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bime.R
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.*
@@ -47,6 +49,14 @@ class WeeklyOverviewFragment : Fragment() {
 
         childFragmentManager.beginTransaction().add(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange)).commit()
         childFragmentManager.executePendingTransactions()
+
+        view.findViewById<FloatingActionButton>(R.id.addActionButton).setOnClickListener() {
+            navigateToAddEntry()
+        }
+    }
+
+    private fun navigateToAddEntry() {
+        findNavController().navigate(R.id.action_weeklyOverview_to_addEntry)
     }
 
 }
