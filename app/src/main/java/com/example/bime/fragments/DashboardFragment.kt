@@ -35,5 +35,6 @@ class DashboardFragment : Fragment() {
 
         val last5 = Timerange(LocalDate.now().minusDays(4),4, this.activity)
         last5.createPieChart(dashboardPieChart)
+
     }
 }

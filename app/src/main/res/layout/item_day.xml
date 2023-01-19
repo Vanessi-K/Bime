@@ -33,7 +33,7 @@
         android:id="@+id/dayList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:itemCount="3"
+        tools:itemCount="2"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
