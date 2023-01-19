@@ -14,12 +14,12 @@ class CheckCalendar(private val calendarView: CalendarView) {
         }
     }
 
-    fun selectedDate() : LocalDate {
-        return  selectedCalenderDate
+    fun selectedDate(): LocalDate {
+        return selectedCalenderDate
     }
 
-    fun setDate(day : LocalDate)  {
-        day.atStartOfDay().toInstant(
+    fun setDate(day: LocalDate) {
+        calendarView.date = day.atStartOfDay().toInstant(
             ZoneOffset.UTC
         ).toEpochMilli()
     }
