@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.classes.CheckCalendar
@@ -46,6 +48,9 @@ class AddEntryFragment : Fragment() {
 
         saveButton.setOnClickListener { onEntrySave(view) }
 
+        view.findViewById<Button>(R.id.cancel_button).setOnClickListener { goBack() }
+        view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
+        view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
     }
 
     fun onEntrySave(view: View) {
@@ -55,6 +60,12 @@ class AddEntryFragment : Fragment() {
         val category = radioButtonCheck.selectedCategory()
 
         db.insertEntry(category, day, time)
+
+        goBack()
+    }
+
+    fun goBack() {
+        findNavController().popBackStack()
     }
 
 }

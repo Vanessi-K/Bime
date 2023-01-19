@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.classes.CheckCalendar
@@ -64,8 +66,17 @@ class EditEntryFragment : Fragment() {
             calendarCheck.setDate(entry.day)
         }
 
-        saveButton.setOnClickListener { onEntryUpgrade() }
-        deleteButton.setOnClickListener { onEntryDelete() }
+        saveButton.setOnClickListener {
+            onEntryUpgrade()
+            goBack()
+        }
+        deleteButton.setOnClickListener {
+            onEntryDelete()
+            goBack()
+        }
+
+        view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
+        view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
     }
 
     fun onEntryUpgrade() {
@@ -82,5 +93,9 @@ class EditEntryFragment : Fragment() {
         val db = DatabaseHandler(this.activity)
 
         db.deleteEntry(1)
+    }
+
+    fun goBack() {
+        findNavController().popBackStack()
     }
 }

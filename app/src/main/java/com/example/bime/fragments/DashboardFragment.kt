@@ -38,7 +38,7 @@ class DashboardFragment : Fragment() {
         last5Days.createPieChart(dashboardPieChart)
 
         childFragmentManager.beginTransaction()
-            .add(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days))
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days))
             .commit()
         childFragmentManager.executePendingTransactions()
 
@@ -52,10 +52,14 @@ class DashboardFragment : Fragment() {
     }
 
     private fun navigateToAddEntry() {
-        findNavController().navigate(R.id.action_dashboard_to_addEntry)
+        val navController = findNavController()
+        val action = DashboardFragmentDirections.actionDashboardToAddEntry()
+        navController.navigate(action)
     }
 
     private fun navigateToWeekly() {
-        findNavController().navigate(R.id.action_dashboard_to_weeklyOverview)
+        val navController = findNavController()
+        val action = DashboardFragmentDirections.actionDashboardToWeeklyOverview(LocalDate.now().toString())
+        navController.navigate(action)
     }
 }

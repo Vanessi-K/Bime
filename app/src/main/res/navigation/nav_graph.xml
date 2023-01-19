@@ -46,6 +46,12 @@
         android:name="com.example.bime.fragments.WeeklyOverviewFragment"
         android:label="fragment_weekly_overview"
         tools:layout="@layout/fragment_weekly_overview">
+
+        <argument
+            android:name="date"
+            app:argType="string"
+            app:nullable="false"/>
+
         <action
             android:id="@+id/action_weeklyOverview_to_addEntry"
             app:destination="@id/addEntry" />
