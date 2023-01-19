@@ -31,10 +31,10 @@ class DashboardFragment : Fragment() {
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
-        val db = DatabaseHandler(this.activity)
+        val last5Days = Timerange(LocalDate.now().minusDays(4),4, this.activity)
+        last5Days.createPieChart(dashboardPieChart)
 
-        val last5 = Timerange(LocalDate.now().minusDays(4),4, this.activity)
-        last5.createPieChart(dashboardPieChart)
-
+        childFragmentManager.beginTransaction().add(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days)).commit()
+        childFragmentManager.executePendingTransactions()
     }
 }

@@ -33,7 +33,6 @@ class WeeklyOverviewFragment : Fragment() {
         val passedDate = LocalDate.now();
         val weekStartDay = passedDate.minusDays(passedDate.dayOfWeek.value.toLong() - 1)
 
-
         val weekTimerange = Timerange(weekStartDay,6, this.activity)
 
         val weeklyBarChart = view.findViewById<BarChart>(R.id.barChart)
@@ -46,11 +45,8 @@ class WeeklyOverviewFragment : Fragment() {
         view.findViewById<TextView>(R.id.weekLabel).text = weekOfYearText
         view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDay()} - ${weekTimerange.getLastDay()}"
 
-
-
         childFragmentManager.beginTransaction().add(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange)).commit()
         childFragmentManager.executePendingTransactions()
-
     }
 
 }
