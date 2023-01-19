@@ -11,7 +11,7 @@ import com.github.mikephil.charting.data.BarEntry
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class Timerange(var startDay: LocalDate, var timerange: Int, private val context: Context?) {
+class Timerange(private var startDay: LocalDate, private var timerange: Int, private val context: Context?) {
 
     val db = DatabaseHandler(this.context)
 
@@ -62,8 +62,7 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
         var prefix = if(endDay == LocalDate.now()) "Last " else ""
 
         val pieChartTitle = "$prefix $dayNumber days"
-        val formatter = DateTimeFormatter.ofPattern("dd.MM");
-        val pieChartSubtitle = "${formatter.format(startDay)} - ${formatter.format(endDay)}"
+        val pieChartSubtitle = "${this.getFirstDay()} - ${this.getLastDay()}"
         CustomPieChart(pieChart, generatePieEntries(), getCategoryLabels(), getCategoryColours(), pieChartTitle, pieChartSubtitle)
     }
 
@@ -112,5 +111,15 @@ class Timerange(var startDay: LocalDate, var timerange: Int, private val context
             categoryColorsArray[categoryIndex] = Color.parseColor(allCategories[categoryIndex].colour)
         }
         return categoryColorsArray;
+    }
+
+    fun getLastDay(): String {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM");
+        return formatter.format(startDay.plusDays(timerange.toLong()))
+    }
+
+    fun getFirstDay(): String {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM");
+        return formatter.format(startDay)
     }
 }

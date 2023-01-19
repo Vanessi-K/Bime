@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bime.DatabaseHandler
@@ -13,7 +14,7 @@ import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.PieChart
 import java.time.LocalDate
 
-class TimerangeListFragment : Fragment() {
+class TimerangeListFragment(val header: String = "", val timerange: Timerange? = null) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +31,13 @@ class TimerangeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val db = DatabaseHandler(this.activity)
+        if(timerange != null) {
+            var itemDayAdapter = ItemDayAdapter(timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  });
+            val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
+            timerangeView.adapter = itemDayAdapter
+        }
 
-        val last5 = Timerange(LocalDate.now().minusDays(4),4, this.activity)
+        view.findViewById<TextView>(R.id.listHeader).text = header
 
-
-        var itemDayAdapter = ItemDayAdapter(last5.listOfDaysInRange.filter { it.listOfEntries.size > 0  });
-        val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
-        timerangeView.adapter = itemDayAdapter
-       // timerangeView.isNestedScrollingEnabled = false
     }
 }
