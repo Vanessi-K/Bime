@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 
 class DashboardFragment : Fragment() {
@@ -36,5 +39,9 @@ class DashboardFragment : Fragment() {
 
         childFragmentManager.beginTransaction().add(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days)).commit()
         childFragmentManager.executePendingTransactions()
+
+        view.findViewById<TextView>(R.id.myWeek).setOnClickListener{
+            findNavController().navigate(R.id.action_dashboard_to_weeklyOverview)
+        }
     }
 }

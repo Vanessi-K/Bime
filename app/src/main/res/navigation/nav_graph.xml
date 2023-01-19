@@ -14,6 +14,16 @@
             android:id="@+id/action_startScreen_to_dashboard"
             app:destination="@id/dashboard" />
     </fragment>
+
+    <fragment
+        android:id="@+id/timerangeList"
+        android:name="com.example.bime.fragments.TimerangeListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_timerange_list" >
+        <action
+            android:id="@+id/action_list_to_addEntry"
+            app:destination="@id/addEntry" />
+    </fragment>
     
     <fragment
         android:id="@+id/dashboard"
@@ -21,7 +31,7 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/action_dashboard_to_weeklyOverview2"
+            android:id="@+id/action_dashboard_to_weeklyOverview"
             app:destination="@id/weeklyOverview" />
         <action
             android:id="@+id/action_dashboard_to_editEntry"
