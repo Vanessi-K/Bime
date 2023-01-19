@@ -6,6 +6,16 @@
     app:startDestination="@id/dashboard">
 
     <fragment
+        android:id="@+id/startScreen"
+        android:name="com.example.bime.fragments.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startScreen_to_dashboard"
+            app:destination="@id/dashboard" />
+    </fragment>
+    
+    <fragment
         android:id="@+id/dashboard"
         android:name="com.example.bime.fragments.DashboardFragment"
         android:label="fragment_dashboard"
