@@ -9,13 +9,14 @@ import com.example.bime.model.Entry
 
 class ItemDayAdapter(
     private var data: List<Day>,
+    private val onClickEntry: (Entry) -> Unit
 ) : RecyclerView.Adapter<ItemDayViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDayViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.item_day, parent, false)
-        return ItemDayViewHolder(view)
+        return ItemDayViewHolder(view, onClickEntry)
     }
 
     override fun onBindViewHolder(holder: ItemDayViewHolder, position: Int) {

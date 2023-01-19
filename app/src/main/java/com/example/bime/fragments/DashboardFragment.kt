@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
+import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
@@ -38,7 +39,7 @@ class DashboardFragment : Fragment() {
         last5Days.createPieChart(dashboardPieChart)
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days))
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days, this::navigateToAddEntry, this::navigateToEditEntry))
             .commit()
         childFragmentManager.executePendingTransactions()
 
@@ -55,6 +56,12 @@ class DashboardFragment : Fragment() {
         val navController = findNavController()
         val action = DashboardFragmentDirections.actionDashboardToAddEntry()
         navController.navigate(action)
+    }
+
+    private fun navigateToEditEntry(entry: Entry) {
+        val navController = findNavController()
+        val action = entry.id?.let { DashboardFragmentDirections.actionDashboardToEditEntry(it) }
+        if (action != null) navController.navigate(action)
     }
 
     private fun navigateToWeekly() {

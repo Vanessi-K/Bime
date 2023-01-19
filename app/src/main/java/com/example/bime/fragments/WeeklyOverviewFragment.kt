@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bime.R
+import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,7 +52,7 @@ class WeeklyOverviewFragment : Fragment() {
         view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDay()} - ${weekTimerange.getLastDay()}"
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange))
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange, this::navigateToAddEntry, this::navigateToEditEntry))
             .commit()
         childFragmentManager.executePendingTransactions()
 
@@ -64,6 +65,12 @@ class WeeklyOverviewFragment : Fragment() {
         val navController = findNavController()
         val action = WeeklyOverviewFragmentDirections.actionWeeklyOverviewToAddEntry()
         navController.navigate(action)
+    }
+
+    private fun navigateToEditEntry(entry: Entry) {
+        val navController = findNavController()
+        val action = entry.id?.let { WeeklyOverviewFragmentDirections.actionWeeklyOverviewToEditEntry(it) }
+        if (action != null) navController.navigate(action)
     }
 
 }

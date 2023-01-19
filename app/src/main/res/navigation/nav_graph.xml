@@ -81,6 +81,12 @@
         android:name="com.example.bime.fragments.EditEntryFragment"
         android:label="fragment_edit_entry"
         tools:layout="@layout/fragment_edit_entry">
+
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false"/>
+
         <action
             android:id="@+id/action_editEntry_to_dashboard"
             app:destination="@id/dashboard" />
