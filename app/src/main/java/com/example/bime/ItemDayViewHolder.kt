@@ -12,7 +12,8 @@ import java.time.format.TextStyle
 import java.util.*
 
 class ItemDayViewHolder(
-    private val root: View
+    private val root: View,
+    private val onClickEntry: (Entry) -> Unit
 ): RecyclerView.ViewHolder(root) {
     private val item: ConstraintLayout = root as ConstraintLayout
 
@@ -23,13 +24,8 @@ class ItemDayViewHolder(
         val monthLabel = item.findViewById<TextView>(R.id.monthLabel)
         monthLabel.text = day.day.month.getDisplayName(TextStyle.SHORT, Locale.US).toString()
 
-        val entryAdapter = ItemEntryAdapter(day.listOfEntries, this::openEntry);
+        val entryAdapter = ItemEntryAdapter(day.listOfEntries, onClickEntry);
         val entryView = root.findViewById<RecyclerView>(R.id.dayList)
         entryView.adapter = entryAdapter
     }
-
-    fun openEntry(entry: Entry) {
-        println("Navigate to $entry")
-    }
-
 }

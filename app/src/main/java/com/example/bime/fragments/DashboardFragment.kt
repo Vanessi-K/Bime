@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
+import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 
 class DashboardFragment : Fragment() {
@@ -31,10 +35,38 @@ class DashboardFragment : Fragment() {
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
-        val last5Days = Timerange(LocalDate.now().minusDays(4),4, this.activity)
+        val last5Days = Timerange(LocalDate.now().minusDays(4), 4, this.activity)
         last5Days.createPieChart(dashboardPieChart)
 
-        childFragmentManager.beginTransaction().add(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days)).commit()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days, this::navigateToAddEntry, this::navigateToEditEntry))
+            .commit()
         childFragmentManager.executePendingTransactions()
+
+        view.findViewById<TextView>(R.id.myWeek).setOnClickListener {
+            navigateToWeekly()
+        }
+
+        view.findViewById<FloatingActionButton>(R.id.addActionButton).setOnClickListener() {
+            navigateToAddEntry()
+        }
+    }
+
+    private fun navigateToAddEntry() {
+        val navController = findNavController()
+        val action = DashboardFragmentDirections.actionDashboardToAddEntry()
+        navController.navigate(action)
+    }
+
+    private fun navigateToEditEntry(entry: Entry) {
+        val navController = findNavController()
+        val action = entry.id?.let { DashboardFragmentDirections.actionDashboardToEditEntry(it) }
+        if (action != null) navController.navigate(action)
+    }
+
+    private fun navigateToWeekly() {
+        val navController = findNavController()
+        val action = DashboardFragmentDirections.actionDashboardToWeeklyOverview(LocalDate.now().toString())
+        navController.navigate(action)
     }
 }

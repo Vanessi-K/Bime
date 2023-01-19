@@ -14,6 +14,16 @@
             android:id="@+id/action_startScreen_to_dashboard"
             app:destination="@id/dashboard" />
     </fragment>
+
+    <fragment
+        android:id="@+id/timerangeList"
+        android:name="com.example.bime.fragments.TimerangeListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_timerange_list" >
+        <action
+            android:id="@+id/action_list_to_addEntry"
+            app:destination="@id/addEntry" />
+    </fragment>
     
     <fragment
         android:id="@+id/dashboard"
@@ -21,7 +31,7 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/action_dashboard_to_weeklyOverview2"
+            android:id="@+id/action_dashboard_to_weeklyOverview"
             app:destination="@id/weeklyOverview" />
         <action
             android:id="@+id/action_dashboard_to_editEntry"
@@ -36,6 +46,12 @@
         android:name="com.example.bime.fragments.WeeklyOverviewFragment"
         android:label="fragment_weekly_overview"
         tools:layout="@layout/fragment_weekly_overview">
+
+        <argument
+            android:name="date"
+            app:argType="string"
+            app:nullable="false"/>
+
         <action
             android:id="@+id/action_weeklyOverview_to_addEntry"
             app:destination="@id/addEntry" />
@@ -65,6 +81,12 @@
         android:name="com.example.bime.fragments.EditEntryFragment"
         android:label="fragment_edit_entry"
         tools:layout="@layout/fragment_edit_entry">
+
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false"/>
+
         <action
             android:id="@+id/action_editEntry_to_dashboard"
             app:destination="@id/dashboard" />

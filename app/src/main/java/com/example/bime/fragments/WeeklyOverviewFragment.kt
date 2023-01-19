@@ -6,14 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.bime.R
+import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.*
 
 class WeeklyOverviewFragment : Fragment() {
+
+    private val args: WeeklyOverviewFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +36,7 @@ class WeeklyOverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val passedDate = LocalDate.now();
+        val passedDate = LocalDate.parse(args.date)
         val weekStartDay = passedDate.minusDays(passedDate.dayOfWeek.value.toLong() - 1)
 
         val weekTimerange = Timerange(weekStartDay,6, this.activity)
@@ -45,8 +51,26 @@ class WeeklyOverviewFragment : Fragment() {
         view.findViewById<TextView>(R.id.weekLabel).text = weekOfYearText
         view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDay()} - ${weekTimerange.getLastDay()}"
 
-        childFragmentManager.beginTransaction().add(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange)).commit()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange, this::navigateToAddEntry, this::navigateToEditEntry))
+            .commit()
         childFragmentManager.executePendingTransactions()
+
+        view.findViewById<FloatingActionButton>(R.id.addActionButton).setOnClickListener() {
+            navigateToAddEntry()
+        }
+    }
+
+    private fun navigateToAddEntry() {
+        val navController = findNavController()
+        val action = WeeklyOverviewFragmentDirections.actionWeeklyOverviewToAddEntry()
+        navController.navigate(action)
+    }
+
+    private fun navigateToEditEntry(entry: Entry) {
+        val navController = findNavController()
+        val action = entry.id?.let { WeeklyOverviewFragmentDirections.actionWeeklyOverviewToEditEntry(it) }
+        if (action != null) navController.navigate(action)
     }
 
 }

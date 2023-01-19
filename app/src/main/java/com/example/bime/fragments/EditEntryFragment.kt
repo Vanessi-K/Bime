@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.classes.CheckCalendar
@@ -15,6 +18,9 @@ import com.example.bime.classes.CheckRadioButtons
 import com.example.bime.classes.CheckTimeInput
 
 class EditEntryFragment : Fragment() {
+
+    private val args: EditEntryFragmentArgs by navArgs()
+    private var passedId = 0
 
     lateinit var calendarCheck: CheckCalendar
     lateinit var radioButtonCheck: CheckRadioButtons
@@ -36,6 +42,8 @@ class EditEntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        passedId = args.id
+
         val db = DatabaseHandler(this.activity)
 
         calendarCheck = CheckCalendar(view.findViewById(R.id.calendarView))
@@ -50,7 +58,7 @@ class EditEntryFragment : Fragment() {
 
         timeCheck = CheckTimeInput(view.findViewById(R.id.hour_input_field), saveButton)
 
-        val entry = db.getEntryById(42)
+        val entry = db.getEntryById(passedId)
 
         if (entry != null) {
             view.findViewById<EditText>(R.id.hour_input_field).setText(entry.time.toString())
@@ -64,8 +72,17 @@ class EditEntryFragment : Fragment() {
             calendarCheck.setDate(entry.day)
         }
 
-        saveButton.setOnClickListener { onEntryUpgrade() }
-        deleteButton.setOnClickListener { onEntryDelete() }
+        saveButton.setOnClickListener {
+            onEntryUpgrade()
+            goBack()
+        }
+        deleteButton.setOnClickListener {
+            onEntryDelete()
+            goBack()
+        }
+
+        view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
+        view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
     }
 
     fun onEntryUpgrade() {
@@ -74,13 +91,17 @@ class EditEntryFragment : Fragment() {
         val time = timeCheck.checkTimeInput()
         val category = radioButtonCheck.selectedCategory()
 
-        db.updateEntry(42, category, day, time)
+        db.updateEntry(passedId, category, day, time)
 
     }
 
     fun onEntryDelete() {
         val db = DatabaseHandler(this.activity)
 
-        db.deleteEntry(1)
+        db.deleteEntry(passedId)
+    }
+
+    fun goBack() {
+        findNavController().popBackStack()
     }
 }
