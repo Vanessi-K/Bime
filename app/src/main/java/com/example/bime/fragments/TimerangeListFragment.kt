@@ -34,8 +34,10 @@ class TimerangeListFragment : Fragment() {
 
         val last5 = Timerange(LocalDate.now().minusDays(4),4, this.activity)
 
+
         var itemDayAdapter = ItemDayAdapter(last5.listOfDaysInRange.filter { it.listOfEntries.size > 0  });
-        val timerangeView = view.findViewById<RecyclerView>(R.id.wholeDay)
+        val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
         timerangeView.adapter = itemDayAdapter
+       // timerangeView.isNestedScrollingEnabled = false
     }
 }

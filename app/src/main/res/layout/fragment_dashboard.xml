@@ -5,25 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pieChart"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        android:layout_marginVertical="32dp"
-        android:layout_marginHorizontal="32dp"/>
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginHorizontal="24dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-    <androidx.fragment.app.FragmentContainerView
-        android:name="com.example.bime.fragments.TimerangeListFragment"
-        android:id="@+id/fragment_timerange_list"
-        tools:layout="@layout/fragment_timerange_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pieChart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            android:layout_marginTop="32dp">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/headerTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Welcome back!"-->
+<!--                android:textSize="32sp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/headerSubtitle"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_marginBottom="4dp"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/headerSubtitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="This is how your last days went. "-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/headerTitle"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/myWeek"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                />-->
+
+            <TextView
+                android:id="@+id/myWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My week"
+                android:textSize="16sp"
+                android:textColor="@color/orange_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/pieChart"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="32dp"
+                />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/myWeek"
+                app:layout_constraintDimensionRatio="1:0.9"
+                android:layout_marginBottom="32dp"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:name="com.example.bime.fragments.TimerangeListFragment"
+                android:id="@+id/fragment_timerange_list"
+                tools:layout="@layout/fragment_timerange_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp" />
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </androidx.core.widget.NestedScrollView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

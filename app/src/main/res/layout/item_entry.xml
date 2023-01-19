@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:elevation="5dp"
     android:layout_marginVertical="8dp"
-    android:layout_marginHorizontal="24dp">
+    android:layout_marginHorizontal="4dp">
 
     <View
         android:id="@+id/highlightColour"
@@ -37,11 +37,11 @@
         android:layout_height="wrap_content"
         android:text="text"
         android:textAlignment="center"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/highlightColourOverlay"
         app:layout_constraintEnd_toEndOf="@id/highlightColourOverlay"
         app:layout_constraintStart_toStartOf="@id/highlightColourOverlay"
-        app:layout_constraintTop_toTopOf="@id/highlightColourOverlay"></TextView>
+        app:layout_constraintTop_toTopOf="@id/highlightColourOverlay"/>
 
     <TextView
         android:id="@+id/entryTime"
@@ -49,13 +49,13 @@
         android:layout_height="wrap_content"
         android:text="text"
         android:textAlignment="viewStart"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_marginStart="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/highlightColour"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

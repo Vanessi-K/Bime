@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bime.model.Category
 import com.example.bime.model.Day
 import com.example.bime.model.Entry
+import java.time.format.TextStyle
+import java.util.*
 
 class ItemDayViewHolder(
     private val root: View
@@ -19,7 +21,7 @@ class ItemDayViewHolder(
         dayLabel.text = day.day.dayOfMonth.toString()
 
         val monthLabel = item.findViewById<TextView>(R.id.monthLabel)
-        monthLabel.text = day.day.month.toString()
+        monthLabel.text = day.day.month.getDisplayName(TextStyle.SHORT, Locale.US).toString()
 
         val entryAdapter = ItemEntryAdapter(day.listOfEntries, this::openEntry);
         val entryView = root.findViewById<RecyclerView>(R.id.dayList)
