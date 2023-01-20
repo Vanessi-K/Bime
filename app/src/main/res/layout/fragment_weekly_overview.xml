@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-            app:menu="@menu/bottom_app_bar_menu"
+            app:menu="@menu/bottom_app_bar_menu_weekly"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
