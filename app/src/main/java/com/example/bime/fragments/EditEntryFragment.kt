@@ -16,6 +16,8 @@ import com.example.bime.R
 import com.example.bime.classes.CheckCalendar
 import com.example.bime.classes.CheckRadioButtons
 import com.example.bime.classes.CheckTimeInput
+import com.google.android.material.bottomappbar.BottomAppBar
+import java.time.LocalDate
 
 class EditEntryFragment : Fragment() {
 
@@ -41,6 +43,21 @@ class EditEntryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar);
+        bottomAppBar.setOnMenuItemClickListener() {
+            when (it.itemId) {
+                R.id.dashboard -> {
+                    navigateToDashboard()
+                    true
+                }
+                R.id.weeklyOverview -> {
+                    navigateToWeekly()
+                    true
+                }
+                else -> false
+            }
+        }
 
         passedId = args.id
 
@@ -103,5 +120,17 @@ class EditEntryFragment : Fragment() {
 
     fun goBack() {
         findNavController().popBackStack()
+    }
+
+    private fun navigateToDashboard() {
+        val navController = findNavController()
+        val action = EditEntryFragmentDirections.actionEditEntryToDashboard()
+        navController.navigate(action)
+    }
+
+    private fun navigateToWeekly() {
+        val navController = findNavController()
+        val action = EditEntryFragmentDirections.actionEditEntryToWeeklyOverview(LocalDate.now().toString())
+        navController.navigate(action)
     }
 }

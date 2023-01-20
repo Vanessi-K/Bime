@@ -72,6 +72,7 @@
                 app:layout_constraintBottom_toTopOf="@id/fragment_timerange_list"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
+                android:clickable="true"
                 />
 
             <TextView
@@ -85,6 +86,7 @@
                 app:layout_constraintBottom_toTopOf="@id/fragment_timerange_list"
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="24dp"
+                android:clickable="true"
                 />
 
             <androidx.fragment.app.FragmentContainerView

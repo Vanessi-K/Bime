@@ -61,6 +61,10 @@
         <action
             android:id="@+id/action_weeklyOverview_to_dashboard"
             app:destination="@id/dashboard" />
+
+        <action
+            android:id="@+id/action_weeklyOverview_self"
+            app:destination="@id/weeklyOverview" />
     </fragment>
 
     <fragment
