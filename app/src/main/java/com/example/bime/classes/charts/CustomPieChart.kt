@@ -36,7 +36,7 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
         val ourSet = PieDataSet(ourPieEntry, "")
         val data = PieData(ourSet)
 
-        data.setValueFormatter(HourFormatter())
+        data.setValueFormatter(FullHourFormatter())
 
         ourSet.sliceSpace = 1f
 
