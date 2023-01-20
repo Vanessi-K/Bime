@@ -6,13 +6,27 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/areaHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Daily overview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/listHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/listHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Header"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/areaHeader"
         app:layout_constraintBottom_toTopOf="@id/line"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="12dp"
@@ -25,10 +39,11 @@
         android:textSize="16sp"
         android:textColor="@color/orange_500"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/areaHeader"
         app:layout_constraintBottom_toTopOf="@id/line"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="12dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
      />
 

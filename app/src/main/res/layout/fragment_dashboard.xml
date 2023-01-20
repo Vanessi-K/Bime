@@ -33,7 +33,7 @@
                 android:id="@+id/headerSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="4dp"
                 android:text="This is how your last days went. "
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="16sp"
@@ -45,20 +45,20 @@
                 android:id="@+id/myWeek"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="32dp"
                 android:clickable="true"
-                android:text="My week"
-                android:textColor="@color/orange_500"
+                android:text="@string/week_cta"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/pieChart"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/myWeek"
@@ -98,8 +98,9 @@
             android:id="@+id/addActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@id/bottomAppBar"
             android:layout_marginBottom="30dp"
+            android:tint="#FFFFFF"
+            app:layout_anchor="@id/bottomAppBar"
             app:srcCompat="@drawable/ic_baseline_add_24" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,6 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
     private fun generatePieEntries(): Array<Double> {
         val entriesByCategory = Array(allCategories.size){0.0}
 
-        println("pieEntries")
         for (categoryIndex in allCategories.indices) {
             println(categoryIndex)
             entriesByCategory[categoryIndex] = timePerCategory(allCategories[categoryIndex].id)
