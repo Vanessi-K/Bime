@@ -37,7 +37,7 @@ class AddEntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar);
+        val bottomAppBar: BottomAppBar = view.findViewById(R.id.bottomAppBar);
         bottomAppBar.setOnMenuItemClickListener() {
             when (it.itemId) {
                 R.id.dashboard -> {
@@ -54,7 +54,10 @@ class AddEntryFragment : Fragment() {
 
         calendarCheck = CheckCalendar(view.findViewById(R.id.calendarView), LocalDate.now())
 
-        radioButtonCheck = CheckRadioButtons(view.findViewById(R.id.radio_group), view.findViewById(R.id.radio_busy_time))
+        radioButtonCheck = CheckRadioButtons(
+            view.findViewById(R.id.radio_group),
+            view.findViewById(R.id.radio_busy_time)
+        )
 
         var saveButton = view.findViewById<Button>(R.id.save_button)
 
@@ -62,7 +65,6 @@ class AddEntryFragment : Fragment() {
 
         saveButton.setOnClickListener { onEntrySave(view) }
 
-        view.findViewById<Button>(R.id.cancel_button).setOnClickListener { goBack() }
         view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
         view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
     }
@@ -90,7 +92,8 @@ class AddEntryFragment : Fragment() {
 
     private fun navigateToWeekly() {
         val navController = findNavController()
-        val action = AddEntryFragmentDirections.actionAddEntryToWeeklyOverview(LocalDate.now().toString())
+        val action =
+            AddEntryFragmentDirections.actionAddEntryToWeeklyOverview(LocalDate.now().toString())
         navController.navigate(action)
     }
 
