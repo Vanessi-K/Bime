@@ -1,12 +1,14 @@
 package com.example.bime.fragments
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bime.DatabaseHandler
@@ -29,6 +31,13 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val nicknameRead = sharedPref.getString("BIME_Nickname", null)
+
+        if(nicknameRead != null) {
+            navigateToDashboard()
+        }
+
         view.findViewById<Button>(R.id.save_button).setOnClickListener() {
             val nickname = view.findViewById<EditText>(R.id.nickname_input_field).text.toString()
             if(nickname != "") {
@@ -39,9 +48,7 @@ class StartFragment : Fragment() {
     }
 
     private fun setNickname(nickname: String) {
-        println("set nickname to $nickname")
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        println("sharedPref: $sharedPref")
         with (sharedPref.edit()) {
             putString("BIME_Nickname", nickname)
             commit()

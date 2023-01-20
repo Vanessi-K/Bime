@@ -1,20 +1,19 @@
 package com.example.bime.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -34,6 +33,7 @@ class DashboardFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,13 +49,9 @@ class DashboardFragment : Fragment() {
         }
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val nickname = sharedPref.getString("BIME_Nickname", null)
+        val nickname = sharedPref.getString("BIME_Nickname", "you")
 
-        if(nickname != null) {
-            view.findViewById<TextView>(R.id.headerTitle).text = "Welcome back, $nickname!"
-        } else {
-            view.findViewById<TextView>(R.id.headerTitle).text = "Welcome back!"
-        }
+        view.findViewById<TextView>(R.id.headerTitle).text = String.format(resources.getString(R.string.headline_dashboard), nickname)
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
