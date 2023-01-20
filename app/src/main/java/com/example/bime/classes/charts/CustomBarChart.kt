@@ -31,6 +31,7 @@ class CustomBarChart(barChart: BarChart,  entries: ArrayList<BarEntry>, labels: 
         barChart.xAxis.setDrawAxisLine(false)
         barChart.xAxis.textSize = 15f
         barChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        barChart.extraBottomOffset = 2f
 
         barChart.axisRight.isEnabled = false
         barChart.axisLeft.setDrawGridLines(false)
