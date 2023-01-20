@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bime.ItemDayAdapter
+import com.example.bime.recycler.day.ItemDayAdapter
 import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
@@ -41,7 +41,7 @@ class TimerangeListFragment(val header: String = "", val timerange: Timerange? =
 
         if(timerange != null && actionsAvailable) {
             val daysList = timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  }
-            val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry);
+            val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry)
             val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
             timerangeView.adapter = itemDayAdapter
 

@@ -7,7 +7,12 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 
-class CustomBarChart(barChart: BarChart,  entries: ArrayList<BarEntry>, labels: Array<String>, colorSet: Array<Int>, titel: String) {
+class CustomBarChart(
+    barChart: BarChart,
+    entries: ArrayList<BarEntry>,
+    labels: Array<String>,
+    colorSet: Array<Int>
+) {
 
     init {
         populateBarChart(barChart, entries, labels, colorSet)

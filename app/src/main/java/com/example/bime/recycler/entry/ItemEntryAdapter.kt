@@ -1,8 +1,9 @@
-package com.example.bime
+package com.example.bime.recycler.entry
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bime.R
 import com.example.bime.model.Entry
 
 class ItemEntryAdapter(

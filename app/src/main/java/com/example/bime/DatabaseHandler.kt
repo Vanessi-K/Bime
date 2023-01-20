@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.bime.model.Category
 import com.example.bime.model.Entry
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class DatabaseHandler(val context: Context?): SQLiteOpenHelper(context, dbName, null, 1) {
 
@@ -23,12 +22,11 @@ class DatabaseHandler(val context: Context?): SQLiteOpenHelper(context, dbName, 
         private const val entry_time_h = "entry_time_h"
     }
 
-    fun dateToSqlDate(date: LocalDate): String {
+    private fun dateToSqlDate(date: LocalDate): String {
         return date.toString()
     }
 
-    fun sqlDateToDate(date: String): LocalDate {
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy")
+    private fun sqlDateToDate(date: String): LocalDate {
         return LocalDate.parse(date)
     }
 
@@ -50,8 +48,8 @@ class DatabaseHandler(val context: Context?): SQLiteOpenHelper(context, dbName, 
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        db?.execSQL("DROP TABLE $category_table");
-        db?.execSQL("DROP TABLE $entry_table");
+        db?.execSQL("DROP TABLE $category_table")
+        db?.execSQL("DROP TABLE $entry_table")
         onCreate(db)
     }
 

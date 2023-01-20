@@ -17,20 +17,18 @@ import com.github.mikephil.charting.data.PieEntry
 class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>, title: String, subtitle: String) {
 
     init {
-        val completeTitle = generateCenterSpannableText(title, subtitle);
+        val completeTitle = generateCenterSpannableText(title, subtitle)
         populatePieChart(pieChart, values, labels, colorSet, completeTitle)
     }
 
     private fun populatePieChart(pieChart: PieChart, values: Array<Double>, labels: Array<String>, colorSet: Array<Int>, title: SpannableString?) {
         //an array to store the pie slices entry
         val ourPieEntry = ArrayList<PieEntry>()
-        var i = 0
 
-        for (entry in values) {
-            var value = values[i].toFloat()
-            var label = labels[i]
+        for ((i, _) in values.withIndex()) {
+            val value = values[i].toFloat()
+            val label = labels[i]
             ourPieEntry.add(PieEntry(value, label))
-            i++
         }
 
         val ourSet = PieDataSet(ourPieEntry, "")
@@ -46,12 +44,12 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
         data.setValueTextColor(Color.WHITE)
         data.setValueTextSize(15f)
 
-        pieChart.centerText = title;
-        pieChart.setDrawCenterText(true);
+        pieChart.centerText = title
+        pieChart.setDrawCenterText(true)
 
         pieChart.isDrawHoleEnabled = true
-        pieChart.holeRadius = 58f;
-        pieChart.transparentCircleRadius = 63f;
+        pieChart.holeRadius = 58f
+        pieChart.transparentCircleRadius = 63f
 
         pieChart.animateY(1400, Easing.EaseInOutQuad)
 
@@ -70,7 +68,7 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
     }
 
 
-    private fun generateCenterSpannableText(title: String, subtitle:String): SpannableString? {
+    private fun generateCenterSpannableText(title: String, subtitle:String): SpannableString {
         val s = SpannableString(title + "\n" + subtitle)
         s.setSpan(RelativeSizeSpan(2f), 0, title.length, 0)
         s.setSpan(StyleSpan(Typeface.NORMAL), title.length, s.length, 0)
