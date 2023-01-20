@@ -4,9 +4,7 @@ import android.widget.CalendarView
 import java.time.LocalDate
 import java.time.ZoneOffset
 
-class CheckCalendar(private val calendarView: CalendarView) {
-
-    private var selectedCalenderDate: LocalDate = LocalDate.now()
+class CheckCalendar(private val calendarView: CalendarView, var selectedCalenderDate: LocalDate) {
 
     init {
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->

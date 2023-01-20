@@ -63,8 +63,6 @@ class EditEntryFragment : Fragment() {
 
         val db = DatabaseHandler(this.activity)
 
-        calendarCheck = CheckCalendar(view.findViewById(R.id.calendarView))
-
         radioButtonCheck = CheckRadioButtons(
             view.findViewById(R.id.radio_group),
             view.findViewById(R.id.radio_busy_time)
@@ -86,6 +84,7 @@ class EditEntryFragment : Fragment() {
                 view.findViewById<RadioGroup>(R.id.radio_group).check(R.id.radio_free_time)
             }
 
+            calendarCheck = CheckCalendar(view.findViewById(R.id.calendarView), entry.day)
             calendarCheck.setDate(entry.day)
         }
 
