@@ -59,6 +59,14 @@ class WeeklyOverviewFragment : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.addActionButton).setOnClickListener() {
             navigateToAddEntry()
         }
+
+        view.findViewById<TextView>(R.id.previousWeek).setOnClickListener() {
+            navigateToSelf(passedDate.minusDays(7))
+        }
+
+        view.findViewById<TextView>(R.id.nextWeek).setOnClickListener() {
+            navigateToSelf(passedDate.plusDays(7))
+        }
     }
 
     private fun navigateToAddEntry() {
@@ -71,6 +79,12 @@ class WeeklyOverviewFragment : Fragment() {
         val navController = findNavController()
         val action = entry.id?.let { WeeklyOverviewFragmentDirections.actionWeeklyOverviewToEditEntry(it) }
         if (action != null) navController.navigate(action)
+    }
+
+    private fun navigateToSelf(date: LocalDate) {
+        val navController = findNavController()
+        val action = WeeklyOverviewFragmentDirections.actionWeeklyOverviewSelf(date.toString())
+        navController.navigate(action)
     }
 
 }
