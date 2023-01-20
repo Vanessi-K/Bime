@@ -1,5 +1,6 @@
 package com.example.bime.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,15 @@ class DashboardFragment : Fragment() {
                 }
                 else -> false
             }
+        }
+
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val nickname = sharedPref.getString("BIME_Nickname", null)
+
+        if(nickname != null) {
+            view.findViewById<TextView>(R.id.headerTitle).text = "Welcome back, $nickname!"
+        } else {
+            view.findViewById<TextView>(R.id.headerTitle).text = "Welcome back!"
         }
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
