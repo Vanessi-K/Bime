@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_begin="130dp" />
 
     <ImageView
         android:id="@+id/app_logo"
@@ -79,7 +79,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/input_border"
-        android:hint="..."
+        android:hint="Please enter your Nickname here..."
         android:inputType="textCapSentences"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -95,6 +95,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:enabled="true"
+        android:paddingVertical="16dp"
         android:text="Let's Start"
         android:textColor="@color/white"
         android:textSize="14sp"

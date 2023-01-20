@@ -22,21 +22,19 @@
                 android:id="@+id/back_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_arrow_back_24"
-                android:clickable="true"
-                />
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
             <ImageView
                 android:id="@+id/cancel_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_close_24"
-                android:clickable="true"
-                />
+                app:srcCompat="@drawable/ic_baseline_close_24" />
 
             <TextView
                 android:id="@+id/headline"
@@ -104,7 +102,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/input_border"
-                android:hint="1.0"
+                android:hint="It should look like this: 1.0"
                 android:inputType="numberDecimal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
@@ -115,24 +113,24 @@
 
             <TextView
                 android:id="@+id/select_type_headline"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Select Type"
+                android:layout_marginTop="37dp"
+                android:text="Select Type:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/hour_input_field" />
 
             <RadioGroup
                 android:id="@+id/radio_group"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/delete_button"
-                app:layout_constraintTop_toBottomOf="@id/select_type_headline">
+                app:layout_constraintStart_toEndOf="@id/select_type_headline"
+                app:layout_constraintTop_toBottomOf="@id/hour_input_field">
 
                 <RadioButton
                     android:id="@+id/radio_busy_time"
@@ -153,35 +151,38 @@
             </RadioGroup>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/delete_button"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="32dp"
-                android:text="Delete"
-                android:textColor="@color/orange_500"
-                android:textSize="14sp"
-                app:backgroundTint="@android:color/white"
-                app:cornerRadius="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radio_group"
-                app:strokeColor="@color/orange_500"
-                app:strokeWidth="2dp" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_button"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:enabled="true"
+                android:layout_marginTop="24dp"
+                android:enabled="false"
+                android:paddingVertical="16dp"
                 android:text="Save"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:backgroundTint="@color/button_background_color"
                 app:cornerRadius="4dp"
-                app:layout_constraintStart_toEndOf="@id/delete_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingVertical="16dp"
+                android:text="Delete"
+                android:textColor="@color/orange_500"
+                android:textSize="14sp"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/save_button"
+                app:strokeColor="@color/orange_500"
+                app:strokeWidth="2dp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
