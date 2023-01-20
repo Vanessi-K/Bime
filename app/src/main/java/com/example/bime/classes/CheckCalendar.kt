@@ -4,10 +4,10 @@ import android.widget.CalendarView
 import java.time.LocalDate
 import java.time.ZoneOffset
 
-class CheckCalendar(private val calendarView: CalendarView, var selectedCalenderDate: LocalDate) {
+class CheckCalendar(private val calendarView: CalendarView, private var selectedCalenderDate: LocalDate) {
 
     init {
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             selectedCalenderDate = LocalDate.of(year, month + 1, dayOfMonth)
         }
     }
