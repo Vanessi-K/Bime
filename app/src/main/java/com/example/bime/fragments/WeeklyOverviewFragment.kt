@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 import java.time.temporal.WeekFields
@@ -35,6 +41,21 @@ class WeeklyOverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar);
+        bottomAppBar.setOnMenuItemClickListener() {
+            when (it.itemId) {
+                R.id.dashboard -> {
+                    navigateToDashboard()
+                    true
+                }
+                R.id.weeklyOverview -> {
+                    navigateToSelf(LocalDate.now())
+                    true
+                }
+                else -> false
+            }
+        }
 
         val passedDate = LocalDate.parse(args.date)
         val weekStartDay = passedDate.minusDays(passedDate.dayOfWeek.value.toLong() - 1)
@@ -87,4 +108,9 @@ class WeeklyOverviewFragment : Fragment() {
         navController.navigate(action)
     }
 
+    private fun navigateToDashboard() {
+        val navController = findNavController()
+        val action = WeeklyOverviewFragmentDirections.actionWeeklyOverviewToDashboard()
+        navController.navigate(action)
+    }
 }

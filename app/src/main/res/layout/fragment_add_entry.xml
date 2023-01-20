@@ -192,7 +192,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_app_bar"
+            android:id="@+id/bottomAppBar"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

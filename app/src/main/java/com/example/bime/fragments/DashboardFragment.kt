@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.bime.DatabaseHandler
 import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 
@@ -32,6 +35,17 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar);
+        bottomAppBar.setOnMenuItemClickListener() {
+            when (it.itemId) {
+                R.id.weeklyOverview -> {
+                    navigateToWeekly()
+                    true
+                }
+                else -> false
+            }
+        }
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
