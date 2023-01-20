@@ -6,16 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bime.DatabaseHandler
 import com.example.bime.ItemDayAdapter
 import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
-import com.github.mikephil.charting.charts.PieChart
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.time.LocalDate
 
 class TimerangeListFragment(val header: String = "", val timerange: Timerange? = null) : Fragment() {
 
@@ -45,9 +40,16 @@ class TimerangeListFragment(val header: String = "", val timerange: Timerange? =
         super.onViewCreated(view, savedInstanceState)
 
         if(timerange != null && actionsAvailable) {
-            var itemDayAdapter = ItemDayAdapter(timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  }, navigateToEditEntry);
+            val daysList = timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  }
+            val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry);
             val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
             timerangeView.adapter = itemDayAdapter
+
+            val numberOfEntries = daysList.map { it.listOfEntries.size }.sum()
+            println("Number of entries: $numberOfEntries")
+            val params: ViewGroup.LayoutParams = timerangeView.getLayoutParams()
+            params.height = (numberOfEntries * 200) + 400
+            timerangeView.layoutParams = params
         }
 
         view.findViewById<TextView>(R.id.listHeader).text = header
