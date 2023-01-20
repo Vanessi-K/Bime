@@ -43,7 +43,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/add_activity"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="23sp"
+                android:textSize="32sp"
                 app:layout_constraintBottom_toTopOf="@id/subline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="Log a new busy time or free time activity."
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="12sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/calender_headline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Choose a date"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/calendarView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +90,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Duration (in hours)"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calendarView" />
@@ -116,8 +116,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Select Type"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/hour_input_field" />
@@ -139,7 +139,7 @@
                     android:layout_marginEnd="24dp"
                     android:buttonTint="@color/blue_500"
                     android:text="Busy Time"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/radio_free_time"
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/orange_500"
                     android:text="Free Time"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
             </RadioGroup>
 
             <com.google.android.material.button.MaterialButton
@@ -158,7 +158,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Cancel"
                 android:textColor="@color/orange_500"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 app:backgroundTint="@android:color/white"
                 app:cornerRadius="4dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +175,7 @@
                 android:enabled="false"
                 android:text="Save"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 app:backgroundTint="@color/button_background_color"
                 app:cornerRadius="4dp"
                 app:layout_constraintStart_toEndOf="@id/cancel_button"

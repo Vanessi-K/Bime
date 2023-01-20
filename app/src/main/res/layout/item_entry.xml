@@ -41,21 +41,22 @@
         app:layout_constraintBottom_toBottomOf="@id/highlightColourOverlay"
         app:layout_constraintEnd_toEndOf="@id/highlightColourOverlay"
         app:layout_constraintStart_toStartOf="@id/highlightColourOverlay"
-        app:layout_constraintTop_toTopOf="@id/highlightColourOverlay"/>
+        app:layout_constraintTop_toTopOf="@id/highlightColourOverlay" />
 
     <TextView
         android:id="@+id/entryTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:text="text"
         android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="24sp"
-        android:layout_marginStart="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/highlightColour"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

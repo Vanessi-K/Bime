@@ -2,6 +2,8 @@
     <string name="app_name">Bime</string>
     <string name="add_activity">Add new <font color="#FF8C00">activity</font></string>
     <string name="edit_activity">Edit <font color="#FF8C00">activity</font></string>
-    <string name="start_text">Hi, nice to meet <font color="#FF8C00">you!</font></string>
-    <string name="start_subline">Track your work life balance in a fast and easy way with <font color="#0AA2F8">Bime.</font></string>
+    <string name="start_text">Hi, nice to meet <font color="#FF8C00">you</font>!</string>
+    <string name="start_subline">Track your work life balance in a fast and easy way with <font color="#0AA2F8">Bime</font>.</string>
+    <string name="headline_dashboard">Welcome back, <font color="#FF8C00">Name</font>!</string>
+    <string name="headline_overview">How was your <font color="#FF8C00">week</font>?</string>
 </resources>
