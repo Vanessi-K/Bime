@@ -13,9 +13,9 @@ import java.time.format.DateTimeFormatter
 
 class Timerange(private var startDay: LocalDate, private var timerange: Int, private val context: Context?) {
 
-    val db = DatabaseHandler(this.context)
+    private val db = DatabaseHandler(this.context)
 
-    val allCategories = db.getAllCategories()
+    private val allCategories = db.getAllCategories()
     val listOfDaysInRange : MutableList<Day> = mutableListOf()
     init {
         for(i in 0..timerange) {
@@ -26,10 +26,10 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
     }
 
     override fun toString(): String {
-        return "Timerange_startDay: ${startDay}, Timerange_timerange: ${timerange}, Timerange_listOfDaysInRange: ${listOfDaysInRange}";
+        return "Timerange_startDay: $startDay, Timerange_timerange: $timerange, Timerange_listOfDaysInRange: $listOfDaysInRange"
     }
 
-    fun timePerCategory(category: Int): Double {
+    private fun timePerCategory(category: Int): Double {
         var time = 0.0
         for (day in listOfDaysInRange) {
             time+=day.timePerCategory(category)
@@ -39,27 +39,14 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
         return time
     }
 
-    fun timePerTimerange(): Double {
-        var time = 0.0
-        for (day in listOfDaysInRange) {
-            time+=day.timePerDay()
-        }
-
-        return time
-    }
-
     fun createBarChart(barChart: BarChart) {
-        val endDay = startDay.plusDays(timerange.toLong())
-
-        val formatter = DateTimeFormatter.ofPattern("dd.MM");
-        val pieChartTitle = "${formatter.format(startDay)} - ${formatter.format(endDay)}"
-        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours(), pieChartTitle)
+        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours())
     }
 
     fun createPieChart(pieChart: PieChart) {
         val dayNumber = timerange + 1
         val endDay = startDay.plusDays(timerange.toLong())
-        var prefix = if(endDay == LocalDate.now()) "Last " else ""
+        val prefix = if(endDay == LocalDate.now()) "Last " else ""
 
         val pieChartTitle = "$prefix $dayNumber days"
         val pieChartSubtitle = "${this.getFirstDay()} - ${this.getLastDay()}"
@@ -67,12 +54,12 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
     }
 
     private fun generatePieEntries(): Array<Double> {
-        val entriesByCategory = Array<Double>(allCategories.size){0.0}
+        val entriesByCategory = Array(allCategories.size){0.0}
 
         println("pieEntries")
         for (categoryIndex in allCategories.indices) {
             println(categoryIndex)
-            entriesByCategory[categoryIndex] = timePerCategory(allCategories[categoryIndex].id!!)
+            entriesByCategory[categoryIndex] = timePerCategory(allCategories[categoryIndex].id)
         }
 
         return entriesByCategory
@@ -80,46 +67,44 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
 
     private fun generateBarEntries(): ArrayList<BarEntry> {
         val entries = ArrayList<BarEntry>()
-        var index = 0
-        for (day in listOfDaysInRange) {
+        for ((index, day) in listOfDaysInRange.withIndex()) {
             val dayValueArrayByCategory = FloatArray(allCategories.size) { 0.0f }
 
             for(categoryIndex in allCategories.indices) {
                 val category = allCategories[categoryIndex]
                 val timePerCategory = day.timePerCategory(category.id).toFloat()
-                dayValueArrayByCategory[categoryIndex] = timePerCategory;
+                dayValueArrayByCategory[categoryIndex] = timePerCategory
             }
             entries.add(BarEntry(index.toFloat(), dayValueArrayByCategory))
-            index++
         }
         return entries
     }
 
     private fun getCategoryLabels(): Array<String> {
-        val categoryLabelsArray = Array<String>(allCategories.size) { "undefined" }
+        val categoryLabelsArray = Array(allCategories.size) { "undefined" }
 
         for (categoryIndex in allCategories.indices) {
             categoryLabelsArray[categoryIndex] = allCategories[categoryIndex].name
         }
-        return categoryLabelsArray;
+        return categoryLabelsArray
     }
 
     private fun getCategoryColours(): Array<Int> {
-        val categoryColorsArray = Array<Int>(allCategories.size) { 0 }
+        val categoryColorsArray = Array(allCategories.size) { 0 }
 
         for (categoryIndex in allCategories.indices) {
             categoryColorsArray[categoryIndex] = Color.parseColor(allCategories[categoryIndex].colour)
         }
-        return categoryColorsArray;
+        return categoryColorsArray
     }
 
     fun getLastDay(): String {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM");
+        val formatter = DateTimeFormatter.ofPattern("dd.MM")
         return formatter.format(startDay.plusDays(timerange.toLong()))
     }
 
     fun getFirstDay(): String {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM");
+        val formatter = DateTimeFormatter.ofPattern("dd.MM")
         return formatter.format(startDay)
     }
 }
