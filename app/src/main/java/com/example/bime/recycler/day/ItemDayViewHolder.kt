@@ -1,11 +1,11 @@
-package com.example.bime
+package com.example.bime.recycler.day
 
-import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bime.model.Category
+import com.example.bime.recycler.entry.ItemEntryAdapter
+import com.example.bime.R
 import com.example.bime.model.Day
 import com.example.bime.model.Entry
 import java.time.format.TextStyle
@@ -24,7 +24,7 @@ class ItemDayViewHolder(
         val monthLabel = item.findViewById<TextView>(R.id.monthLabel)
         monthLabel.text = day.day.month.getDisplayName(TextStyle.SHORT, Locale.US).toString()
 
-        val entryAdapter = ItemEntryAdapter(day.listOfEntries, onClickEntry);
+        val entryAdapter = ItemEntryAdapter(day.listOfEntries, onClickEntry)
         val entryView = root.findViewById<RecyclerView>(R.id.dayList)
         entryView.adapter = entryAdapter
     }
