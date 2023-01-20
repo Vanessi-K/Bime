@@ -21,12 +21,12 @@
                 android:id="@+id/headerTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How was your week?"
+                android:text="@string/headline_overview"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="32sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/weekLabel"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/weekLabel"
@@ -45,11 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0x.0x - 0y.0y"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weekLabel"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/barChart"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weekLabel" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"

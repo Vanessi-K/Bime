@@ -21,13 +21,13 @@
                 android:id="@+id/headerTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome back!"
-                android:textSize="32sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/headerSubtitle"
                 android:layout_marginBottom="4dp"
-                />
+                android:text="@string/headline_dashboard"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toTopOf="@id/headerSubtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/headerSubtitle"
@@ -36,6 +36,7 @@
                 android:layout_marginBottom="12dp"
                 android:onClick="clickMyWeek"
                 android:text="This is how your last days went. "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/myWeek"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,14 +48,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="12dp"
+                android:clickable="true"
                 android:text="My week"
                 android:textColor="@color/orange_500"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/pieChart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:clickable="true"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
