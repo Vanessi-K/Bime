@@ -2,9 +2,9 @@ package com.example.bime.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
-import android.provider.Settings.Global.getString
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +37,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar);
+        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar)
         bottomAppBar.setOnMenuItemClickListener() {
             when (it.itemId) {
                 R.id.weeklyOverview -> {
@@ -51,7 +51,7 @@ class DashboardFragment : Fragment() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val nickname = sharedPref.getString("BIME_Nickname", "you")
 
-        view.findViewById<TextView>(R.id.headerTitle).text = String.format(resources.getString(R.string.headline_dashboard), nickname)
+        view.findViewById<TextView>(R.id.headerTitle).text = Html.fromHtml(resources.getString(R.string.headline_dashboard, nickname),FROM_HTML_MODE_LEGACY)
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
