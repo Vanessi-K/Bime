@@ -56,7 +56,7 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/days" >
+                app:layout_constraintTop_toBottomOf="@id/days">
             </com.github.mikephil.charting.charts.BarChart>
 
             <ImageView
@@ -67,6 +67,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/previousWeek"
                 app:layout_constraintBottom_toBottomOf="@id/previousWeek"
+                android:clickable="true"
                 />
 
             <TextView
@@ -103,6 +104,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/nextWeek"
                 app:layout_constraintBottom_toBottomOf="@id/nextWeek"
+                android:clickable="true"
                 />
 
             <androidx.fragment.app.FragmentContainerView

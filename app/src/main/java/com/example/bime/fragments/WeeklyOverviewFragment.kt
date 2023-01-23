@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -81,13 +82,13 @@ class WeeklyOverviewFragment : Fragment() {
             navigateToAddEntry()
         }
 
-        view.findViewById<TextView>(R.id.previousWeek).setOnClickListener() {
-            navigateToSelf(passedDate.minusDays(7))
-        }
+        view.findViewById<TextView>(R.id.previousWeek).setOnClickListener() { navigateToSelf(passedDate.minusDays(7)) }
 
-        view.findViewById<TextView>(R.id.nextWeek).setOnClickListener() {
-            navigateToSelf(passedDate.plusDays(7))
-        }
+        view.findViewById<ImageView>(R.id.leftArrow).setOnClickListener() { navigateToSelf(passedDate.minusDays(7)) }
+
+        view.findViewById<TextView>(R.id.nextWeek).setOnClickListener() { navigateToSelf(passedDate.plusDays(7)) }
+
+        view.findViewById<ImageView>(R.id.rightArrow).setOnClickListener() { navigateToSelf(passedDate.plusDays(7)) }
     }
 
     private fun navigateToAddEntry() {
