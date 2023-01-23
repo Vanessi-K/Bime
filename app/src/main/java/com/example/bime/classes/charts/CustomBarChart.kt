@@ -41,6 +41,8 @@ class CustomBarChart(
         barChart.axisRight.isEnabled = false
         barChart.axisLeft.setDrawGridLines(false)
 
+        barChart.axisLeft.axisMinimum = 0f
+
         barChart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         barChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
         barChart.legend.orientation = Legend.LegendOrientation.HORIZONTAL
