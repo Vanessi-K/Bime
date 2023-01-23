@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
+//        val db = DatabaseHandler(this.activity)
 //        db.insertEntry(Entry(1,0, 5.8, LocalDate.now()))
 //        db.insertEntry(Entry(1,0, 6.8, LocalDate.now()))
 //        db.insertEntry(Entry(1,0, 4.8, LocalDate.now()))
