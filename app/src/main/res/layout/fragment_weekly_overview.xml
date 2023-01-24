@@ -49,6 +49,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weekLabel" />
 
+            <TextView
+                android:id="@+id/backToCurrentWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back to current week"
+                android:textSize="12sp"
+                android:textColor="@color/orange_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weekLabel"
+                app:layout_constraintBottom_toTopOf="@id/barChart"
+                android:clickable="true"
+                />
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
                 android:layout_width="0dp"
