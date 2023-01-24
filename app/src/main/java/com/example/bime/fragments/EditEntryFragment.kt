@@ -1,5 +1,6 @@
 package com.example.bime.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -93,9 +94,28 @@ class EditEntryFragment : Fragment() {
             goBack()
         }
         deleteButton.setOnClickListener {
-            onEntryDelete()
-            goBack()
-        }
+                val dialogBuilder = AlertDialog.Builder(this.activity)
+
+                // set message of alert dialog
+                dialogBuilder.setMessage("Are you sure you want to delete this entry?")
+                    // if the dialog is cancelable
+                    .setCancelable(true)
+                    // positive button text and action
+                    .setPositiveButton("Proceed") { dialog, id ->
+                        onEntryDelete()
+                    }
+                    // negative button text and action
+                    .setNegativeButton("Cancel") { dialog, id ->
+                        dialog.cancel()
+                    }
+
+            // create dialog box
+                val alert = dialogBuilder.create()
+                // set title for alert dialog box
+                alert.setTitle("Delete Entry")
+                // show alert dialog
+                alert.show()
+            }
 
         view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
         view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
@@ -115,6 +135,8 @@ class EditEntryFragment : Fragment() {
         val db = DatabaseHandler(this.activity)
 
         db.deleteEntry(passedId)
+
+        goBack()
     }
 
     fun goBack() {
