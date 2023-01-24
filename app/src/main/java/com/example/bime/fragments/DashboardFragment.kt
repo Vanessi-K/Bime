@@ -61,7 +61,7 @@ class DashboardFragment : Fragment() {
         last5Days.createPieChart(dashboardPieChart)
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days, this::navigateToAddEntry, this::navigateToEditEntry))
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days, this::navigateToAddEntry, this::navigateToEditEntry, true))
             .commit()
         childFragmentManager.executePendingTransactions()
 
