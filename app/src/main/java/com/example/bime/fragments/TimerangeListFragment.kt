@@ -37,6 +37,10 @@ class TimerangeListFragment(private val header: String = "", private val timeran
         if(timerange != null && actionsAvailable) {
             var daysList = timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  }
 
+            if(daysList.isEmpty()) {
+                view.findViewById<TextView>(R.id.emptyList).visibility = View.VISIBLE
+            }
+
             if(currentTimeTop) {
                 daysList = daysList.reversed()
             }
