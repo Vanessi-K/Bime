@@ -18,9 +18,9 @@ import java.time.LocalDate
 
 class AddEntryFragment : Fragment() {
 
-    lateinit var calendarCheck: CheckCalendar
-    lateinit var radioButtonCheck: CheckRadioButtons
-    lateinit var timeCheck: CheckTimeInput
+    private lateinit var calendarCheck: CheckCalendar
+    private lateinit var radioButtonCheck: CheckRadioButtons
+    private lateinit var timeCheck: CheckTimeInput
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,17 +59,17 @@ class AddEntryFragment : Fragment() {
             view.findViewById(R.id.radio_busy_time)
         )
 
-        var saveButton = view.findViewById<Button>(R.id.save_button)
+        val saveButton = view.findViewById<Button>(R.id.save_button)
 
         timeCheck = CheckTimeInput(view.findViewById(R.id.hour_input_field), saveButton)
 
-        saveButton.setOnClickListener { onEntrySave(view) }
+        saveButton.setOnClickListener { onEntrySave() }
 
         view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
         view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
     }
 
-    fun onEntrySave(view: View) {
+    private fun onEntrySave() {
         val db = DatabaseHandler(this.activity)
         val day = calendarCheck.selectedDate()
         val time = timeCheck.checkTimeInput()
@@ -80,7 +80,7 @@ class AddEntryFragment : Fragment() {
         goBack()
     }
 
-    fun goBack() {
+    private fun goBack() {
         findNavController().popBackStack()
     }
 
