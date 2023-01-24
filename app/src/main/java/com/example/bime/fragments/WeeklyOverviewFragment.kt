@@ -68,7 +68,7 @@ class WeeklyOverviewFragment : Fragment() {
 
         val weekFields = WeekFields.of(Locale.getDefault())
         val weekOfYearNumber: Int = passedDate.get(weekFields.weekOfWeekBasedYear())
-        val weekOfYearText = "Week $weekOfYearNumber"
+        val weekOfYearText = "Calendar week $weekOfYearNumber"
 
         view.findViewById<TextView>(R.id.weekLabel).text = weekOfYearText
         view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDay()} - ${weekTimerange.getLastDay()}"
