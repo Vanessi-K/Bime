@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:buttonTint="@color/blue_500"
+                    android:buttonTint="@color/orange_500"
                     android:text="Busy Time"
                     android:textSize="16sp" />
 
@@ -145,7 +145,7 @@
                     android:id="@+id/radio_free_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/orange_500"
+                    android:buttonTint="@color/blue_500"
                     android:text="Free Time"
                     android:textSize="16sp" />
             </RadioGroup>
