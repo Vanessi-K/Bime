@@ -1,6 +1,5 @@
 package com.example.bime.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +25,9 @@ class EditEntryFragment : Fragment() {
     private val args: EditEntryFragmentArgs by navArgs()
     private var passedId = 0
 
-    lateinit var calendarCheck: CheckCalendar
-    lateinit var radioButtonCheck: CheckRadioButtons
-    lateinit var timeCheck: CheckTimeInput
+    private lateinit var calendarCheck: CheckCalendar
+    private lateinit var radioButtonCheck: CheckRadioButtons
+    private lateinit var timeCheck: CheckTimeInput
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,8 +69,8 @@ class EditEntryFragment : Fragment() {
             view.findViewById(R.id.radio_busy_time)
         )
 
-        var saveButton = view.findViewById<Button>(R.id.save_button)
-        var deleteButton = view.findViewById<Button>(R.id.delete_button)
+        val saveButton = view.findViewById<Button>(R.id.save_button)
+        val deleteButton = view.findViewById<Button>(R.id.delete_button)
 
         timeCheck = CheckTimeInput(view.findViewById(R.id.hour_input_field), saveButton)
 
@@ -95,14 +94,14 @@ class EditEntryFragment : Fragment() {
             goBack()
         }
         deleteButton.setOnClickListener {
-            var deleteAlert = DeleteAlert(this.activity, this::onEntryDelete)
+            DeleteAlert(this.activity, this::onEntryDelete)
             }
 
         view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener { goBack() }
         view.findViewById<ImageView>(R.id.cancel_icon).setOnClickListener { goBack() }
     }
 
-    fun onEntryUpgrade() {
+    private fun onEntryUpgrade() {
         val db = DatabaseHandler(this.activity)
         val day = calendarCheck.selectedDate()
         val time = timeCheck.checkTimeInput()
@@ -112,7 +111,7 @@ class EditEntryFragment : Fragment() {
 
     }
 
-    fun onEntryDelete() {
+    private fun onEntryDelete() {
         val db = DatabaseHandler(this.activity)
 
         db.deleteEntry(passedId)
@@ -120,7 +119,7 @@ class EditEntryFragment : Fragment() {
         goBack()
     }
 
-    fun goBack() {
+    private fun goBack() {
         findNavController().popBackStack()
     }
 
