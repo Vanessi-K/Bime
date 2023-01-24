@@ -12,27 +12,22 @@ import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 
-class TimerangeListFragment(val header: String = "", val timerange: Timerange? = null) : Fragment() {
+class TimerangeListFragment(private val header: String = "", private val timerange: Timerange? = null, private val currentTimeTop: Boolean = false) : Fragment() {
 
     private var actionsAvailable: Boolean = false
     private lateinit var navigateToAddEntry: () -> Unit
     private lateinit var navigateToEditEntry: (Entry) -> Unit
 
-    constructor(header: String, timerange: Timerange, navigateToAddEntry: () -> Unit, navigateToEditEntry: (Entry) -> Unit) : this(header, timerange) {
+    constructor(header: String, timerange: Timerange, navigateToAddEntry: () -> Unit, navigateToEditEntry: (Entry) -> Unit, currentTimeTop: Boolean = false) : this(header, timerange, currentTimeTop) {
         this.navigateToAddEntry = navigateToAddEntry
         this.navigateToEditEntry = navigateToEditEntry
         this.actionsAvailable = true
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_timerange_list, container, false)
     }
 
@@ -40,23 +35,26 @@ class TimerangeListFragment(val header: String = "", val timerange: Timerange? =
         super.onViewCreated(view, savedInstanceState)
 
         if(timerange != null && actionsAvailable) {
-            val daysList = timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  }
+            var daysList = timerange.listOfDaysInRange.filter { it.listOfEntries.size > 0  }
+
+            if(daysList.isEmpty()) {
+                view.findViewById<TextView>(R.id.emptyList).visibility = View.VISIBLE
+            }
+
+            if(currentTimeTop) {
+                daysList = daysList.reversed()
+            }
+
             val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry)
             val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
             timerangeView.adapter = itemDayAdapter
-
-            val numberOfEntries = daysList.map { it.listOfEntries.size }.sum()
-            println("Number of entries: $numberOfEntries")
-            val params: ViewGroup.LayoutParams = timerangeView.getLayoutParams()
-            params.height = (numberOfEntries * 200) + 400
-            timerangeView.layoutParams = params
+            timerangeView.isNestedScrollingEnabled = false
         }
 
         view.findViewById<TextView>(R.id.listHeader).text = header
 
         if(actionsAvailable) {
             view.findViewById<TextView>(R.id.newEntry).setOnClickListener{
-                println("Navigating to add entry")
                 navigateToAddEntry()
             }
         }

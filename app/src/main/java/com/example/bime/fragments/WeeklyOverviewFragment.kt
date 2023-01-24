@@ -6,14 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.example.bime.R
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
@@ -43,7 +38,7 @@ class WeeklyOverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar);
+        val bottomAppBar : BottomAppBar = view.findViewById(R.id.bottomAppBar)
         bottomAppBar.setOnMenuItemClickListener() {
             when (it.itemId) {
                 R.id.dashboard -> {
@@ -61,6 +56,14 @@ class WeeklyOverviewFragment : Fragment() {
         val passedDate = LocalDate.parse(args.date)
         val weekStartDay = passedDate.minusDays(passedDate.dayOfWeek.value.toLong() - 1)
 
+
+        val backToCurrentBtn = view.findViewById<TextView>(R.id.backToCurrentWeek)
+        if(passedDate.isEqual(LocalDate.now())) {
+            backToCurrentBtn.visibility = View.GONE
+        } else {
+            backToCurrentBtn.setOnClickListener { navigateToSelf(LocalDate.now()) }
+        }
+
         val weekTimerange = Timerange(weekStartDay,6, this.activity)
 
         val weeklyBarChart = view.findViewById<BarChart>(R.id.barChart)
@@ -68,7 +71,7 @@ class WeeklyOverviewFragment : Fragment() {
 
         val weekFields = WeekFields.of(Locale.getDefault())
         val weekOfYearNumber: Int = passedDate.get(weekFields.weekOfWeekBasedYear())
-        val weekOfYearText = "Week $weekOfYearNumber"
+        val weekOfYearText = "Calendar week $weekOfYearNumber"
 
         view.findViewById<TextView>(R.id.weekLabel).text = weekOfYearText
         view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDay()} - ${weekTimerange.getLastDay()}"

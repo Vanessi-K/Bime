@@ -79,7 +79,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/input_border"
-        android:hint="Please enter your Nickname here..."
+        android:hint="Please enter your nickname here..."
         android:inputType="textCapSentences"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"

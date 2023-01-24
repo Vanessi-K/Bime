@@ -1,5 +1,6 @@
 package com.example.bime.classes.charts
 
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -54,6 +55,6 @@ class CustomBarChart(
 
         barChart.setTouchEnabled(false)
 
-        barChart.animateY(1400)
+        barChart.animateY(1400, Easing.EaseInOutQuad)
     }
 }

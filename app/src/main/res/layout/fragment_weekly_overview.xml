@@ -6,16 +6,20 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="-32dp"
+        app:layout_constraintBottom_toTopOf="@id/coordinator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="64dp">
 
             <TextView
                 android:id="@+id/headerTitle"
@@ -24,7 +28,6 @@
                 android:text="@string/headline_overview"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="32sp"
-                app:layout_constraintBottom_toTopOf="@id/weekLabel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Week 00"
+                android:text="Calendar week 00"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,9 +48,20 @@
                 android:layout_height="wrap_content"
                 android:text="0x.0x - 0y.0y"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@id/barChart"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weekLabel" />
+
+            <TextView
+                android:id="@+id/backToCurrentWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back to current week"
+                android:textSize="12sp"
+                android:textColor="@color/orange_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/barChart"
+                android:clickable="true"
+                />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
@@ -79,7 +93,6 @@
                 android:clickable="true"
                 android:text="Previous week"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/fragment_timerange_list"
                 app:layout_constraintStart_toEndOf="@id/leftArrow"
                 app:layout_constraintTop_toBottomOf="@id/barChart" />
 
@@ -92,7 +105,6 @@
                 android:clickable="true"
                 android:text="Next week"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/fragment_timerange_list"
                 app:layout_constraintEnd_toStartOf="@id/rightArrow"
                 app:layout_constraintTop_toBottomOf="@id/barChart" />
 
@@ -111,12 +123,11 @@
                 android:id="@+id/fragment_timerange_list"
                 android:name="com.example.bime.fragments.TimerangeListFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/barChart"
+                app:layout_constraintTop_toBottomOf="@id/rightArrow"
                 tools:layout="@layout/fragment_timerange_list" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,8 +42,8 @@ class DatabaseHandler(val context: Context?): SQLiteOpenHelper(context, dbName, 
                 "$entry_day DATETIME, " +
                 "$entry_time_h DOUBLE);")
 
-        insertCategory(Category(1, "Busy time", "#84D1FC"),db)
-        insertCategory(Category(2, "Free time", "#FF8C00"),db)
+        insertCategory(Category(1, "Busy time", "#FF8C00"),db)
+        insertCategory(Category(2, "Free time", "#84D1FC"),db)
 
     }
 

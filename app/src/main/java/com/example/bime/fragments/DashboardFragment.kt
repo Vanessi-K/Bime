@@ -5,9 +5,11 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_LEGACY
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -50,16 +52,26 @@ class DashboardFragment : Fragment() {
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val nickname = sharedPref.getString("BIME_Nickname", "you")
+        val nicknameEscaped: String = TextUtils.htmlEncode(nickname)
 
-        view.findViewById<TextView>(R.id.headerTitle).text = Html.fromHtml(resources.getString(R.string.headline_dashboard, nickname),FROM_HTML_MODE_LEGACY)
+        view.findViewById<TextView>(R.id.headerTitle).text = Html.fromHtml(resources.getString(R.string.headline_dashboard, nicknameEscaped),FROM_HTML_MODE_LEGACY)
 
         val dashboardPieChart = view.findViewById<PieChart>(R.id.pieChart)
 
         val last5Days = Timerange(LocalDate.now().minusDays(4), 4, this.activity)
-        last5Days.createPieChart(dashboardPieChart)
+
+        val last5DaysEntries = last5Days.listOfDaysInRange.flatMap { it.listOfEntries }
+
+        if(last5DaysEntries.isEmpty()) {
+            view.findViewById<ImageView>(R.id.emptyImage).visibility = View.VISIBLE
+            dashboardPieChart.visibility = View.INVISIBLE
+        } else {
+            last5Days.createPieChart(dashboardPieChart)
+        }
+
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days, this::navigateToAddEntry, this::navigateToEditEntry))
+            .replace(R.id.fragment_timerange_list, TimerangeListFragment("Last 5 days", last5Days, this::navigateToAddEntry, this::navigateToEditEntry, true))
             .commit()
         childFragmentManager.executePendingTransactions()
 
