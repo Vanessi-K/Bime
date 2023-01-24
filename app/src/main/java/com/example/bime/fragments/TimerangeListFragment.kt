@@ -48,11 +48,7 @@ class TimerangeListFragment(private val header: String = "", private val timeran
             val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry)
             val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
             timerangeView.adapter = itemDayAdapter
-
-            val numberOfEntries = daysList.sumOf { it.listOfEntries.size }
-            val params: ViewGroup.LayoutParams = timerangeView.layoutParams
-            params.height = (numberOfEntries * 200) + 400
-            timerangeView.layoutParams = params
+            timerangeView.isNestedScrollingEnabled = false
         }
 
         view.findViewById<TextView>(R.id.listHeader).text = header

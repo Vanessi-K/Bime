@@ -64,6 +64,8 @@ class CustomPieChart(pieChart: PieChart, values: Array<Double>, labels: Array<St
         pieChart.isHighlightPerTapEnabled = false
 
         pieChart.setDrawEntryLabels(false)
+
+        pieChart.setNoDataText("")
         pieChart.invalidate()
     }
 
