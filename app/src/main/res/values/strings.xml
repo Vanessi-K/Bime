@@ -6,5 +6,5 @@
     <string name="start_subline">Track your work life balance in a fast and easy way with <font color="#0AA2F8">Bime</font>.</string>
     <string name="headline_dashboard">Welcome back, &lt;font color="#FF8C00">%1$s&lt;/font>!</string>
     <string name="headline_overview">How was your <font color="#FF8C00">week</font>?</string>
-    <string name="week_cta">Do you want to know how your <font color="#FF8C00">whole week</font> was?</string>
+    <string name="week_cta">Do you want to know how your <font color="#FF8C00"><b>whole week</b></font> was?</string>
 </resources>
