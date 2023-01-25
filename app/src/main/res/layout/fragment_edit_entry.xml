@@ -102,7 +102,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/input_border"
-                android:hint="It should look like this: 1.0"
+                android:hint="e.g., 1, add half hours with .5"
                 android:inputType="numberDecimal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
