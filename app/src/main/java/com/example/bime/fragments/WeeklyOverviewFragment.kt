@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bime.R
+import com.example.bime.classes.OnSwipeListener
 import com.example.bime.model.Entry
 import com.example.bime.model.Timerange
 import com.github.mikephil.charting.charts.BarChart
@@ -92,6 +93,17 @@ class WeeklyOverviewFragment : Fragment() {
         view.findViewById<TextView>(R.id.nextWeek).setOnClickListener() { navigateToSelf(passedDate.plusDays(7)) }
 
         view.findViewById<ImageView>(R.id.rightArrow).setOnClickListener() { navigateToSelf(passedDate.plusDays(7)) }
+
+
+        weeklyBarChart.setOnTouchListener(object : OnSwipeListener(this.context) {
+            override fun onSwipeLeft() {
+                navigateToSelf(passedDate.plusDays(7))
+            }
+
+            override fun onSwipeRight() {
+                navigateToSelf(passedDate.minusDays(7))
+            }
+        })
     }
 
     private fun navigateToAddEntry() {

@@ -11,7 +11,8 @@ import com.example.bime.model.Entry
 
 class ItemEntryViewHolder(
     root: View,
-    private val onClick: (Entry) -> Unit
+    private val onClick: (Entry) -> Unit,
+    private val onHold: (Entry) -> Unit
 ): RecyclerView.ViewHolder(root) {
     private val item: ConstraintLayout = root as ConstraintLayout
 
@@ -28,6 +29,11 @@ class ItemEntryViewHolder(
 
         item.setOnClickListener {
             onClick(entry)
+        }
+
+        item.setOnLongClickListener{
+            onHold(entry)
+            true
         }
     }
 }

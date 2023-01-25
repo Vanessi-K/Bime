@@ -45,7 +45,7 @@ class TimerangeListFragment(private val header: String = "", private val timeran
                 daysList = daysList.reversed()
             }
 
-            val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry)
+            val itemDayAdapter = ItemDayAdapter(daysList, navigateToEditEntry, this.requireActivity())
             val timerangeView = view.findViewById<RecyclerView>(R.id.allDays)
             timerangeView.adapter = itemDayAdapter
             timerangeView.isNestedScrollingEnabled = false

@@ -12,7 +12,6 @@ class Entry(var category: Int? = null, val id: Int? = null, var time: Double = 0
 
     fun getCategory(): Category? {
         val db = DatabaseHandler(context)
-        println(category)
         return if(category != null) db.getCategoryById(category!!) else null
     }
 }

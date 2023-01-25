@@ -14,18 +14,18 @@
         android:textAlignment="viewStart"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/monthLabel"
+        app:layout_constraintEnd_toEndOf="@id/weekdayMonthLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/monthLabel"
+        android:id="@+id/weekdayMonthLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="60dp"
-        android:text="DEZ"
+        android:minWidth="80dp"
+        android:text="Wed - DEZ"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dayLabel" />
 
@@ -36,7 +36,7 @@
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/monthLabel"
+        app:layout_constraintStart_toEndOf="@id/weekdayMonthLabel"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="2"
         tools:listitem="@layout/item_entry" />

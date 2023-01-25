@@ -90,7 +90,6 @@ class DatabaseHandler(val context: Context?): SQLiteOpenHelper(context, dbName, 
     fun getCategoryById(id: Int): Category? {
         val db = this.writableDatabase
 
-        println(id)
         val cursor = db.rawQuery("SELECT * FROM $category_table WHERE $category_id = $id", null)
         val allCategories: MutableList<Category> = mutableListOf()
 
