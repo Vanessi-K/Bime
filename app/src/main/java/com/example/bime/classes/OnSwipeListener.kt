@@ -32,8 +32,8 @@ open class OnSwipeListener(context: Context?) : View.OnTouchListener {
             velocityY: Float
         ): Boolean {
 
-            val SWIPE_VELOCITY_THRESHOLD = 40
-            val SWIPE_THRESHOLD = 20
+            val SWIPE_VELOCITY_THRESHOLD = 20
+            val SWIPE_THRESHOLD = 100
 
             val diffY = e2.y - e1.y
             val diffX = e2.x - e1.x
