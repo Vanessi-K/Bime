@@ -26,8 +26,10 @@ class ItemDayViewHolder(
         val dayLabel = item.findViewById<TextView>(R.id.dayLabel)
         dayLabel.text = day.day.dayOfMonth.toString()
 
-        val monthLabel = item.findViewById<TextView>(R.id.monthLabel)
-        monthLabel.text = day.day.month.getDisplayName(TextStyle.SHORT, Locale.US).toString()
+        val weekdayMonthLabel = item.findViewById<TextView>(R.id.weekdayMonthLabel)
+        val weekday = day.day.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US).toString()
+        val month = day.day.month.getDisplayName(TextStyle.SHORT, Locale.US).toString().uppercase(Locale.ROOT)
+        weekdayMonthLabel.text = "$weekday - $month"
 
         entryAdapter = ItemEntryAdapter(day.listOfEntries, onClickEntry, this::deleteEntry)
         val entryView = root.findViewById<RecyclerView>(R.id.dayList)
