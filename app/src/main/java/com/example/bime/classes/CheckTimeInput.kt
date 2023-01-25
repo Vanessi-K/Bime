@@ -17,11 +17,10 @@ class CheckTimeInput(private val timeInput: EditText, private val saveButton: Bu
                 before: Int, count: Int
             ) {
                 val checkTimeContent = timeInput.text.toString()
-                saveButton.isEnabled = checkTimeContent != ""
+                saveButton.isEnabled = checkTimeContent != "" && checkTimeContent.toDouble() < 24.1
             }
 
             override fun afterTextChanged(p0: Editable?) {
-
             }
         })
     }
