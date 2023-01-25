@@ -35,7 +35,6 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
     init {
         for(i in 0..timerange) {
             val day= Day(startDay.plusDays(i.toLong()), context)
-            println(day)
             listOfDaysInRange.add(day)
         }
     }
@@ -50,7 +49,6 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
             time+=day.timePerCategory(category)
         }
 
-        println("$category - $time")
         return time
     }
 
