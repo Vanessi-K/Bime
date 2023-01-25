@@ -18,6 +18,12 @@ class CheckTimeInput(private val timeInput: EditText, private val saveButton: Bu
             ) {
                 val checkTimeContent = timeInput.text.toString()
                 saveButton.isEnabled = checkTimeContent != "" && checkTimeContent.toDouble() < 24.1
+
+                if (timeInput.length() == 0) {
+                    timeInput.error = "Duration is required"
+                } else if (timeInput.text.toString().toDouble() > 24) {
+                    timeInput.error = "Can't be more than 24 hours"
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {
