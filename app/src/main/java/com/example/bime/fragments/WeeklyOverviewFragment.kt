@@ -74,7 +74,7 @@ class WeeklyOverviewFragment : Fragment() {
         val weekOfYearText = "Calendar week $weekOfYearNumber"
 
         view.findViewById<TextView>(R.id.weekLabel).text = weekOfYearText
-        view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDay()} - ${weekTimerange.getLastDay()}"
+        view.findViewById<TextView>(R.id.days).text = "${weekTimerange.getFirstDayFormatted()} - ${weekTimerange.getLastDayFormatted()}"
 
         childFragmentManager.beginTransaction()
             .replace(R.id.fragment_timerange_list, TimerangeListFragment(weekOfYearText, weekTimerange, this::navigateToAddEntry, this::navigateToEditEntry))

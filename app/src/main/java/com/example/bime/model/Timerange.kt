@@ -15,8 +15,23 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
 
     private val db = DatabaseHandler(this.context)
 
-    private val allCategories = db.getAllCategories()
+    private val allCategories = db.getAllCategories().toList()
     val listOfDaysInRange : MutableList<Day> = mutableListOf()
+
+    private val categoriesWithTime: List<Category>
+        get() {
+            val categoriesWithTimeList : MutableList<Category> = mutableListOf()
+
+            for (category in allCategories) {
+                val time = timePerCategory(category.id)
+
+                if(time > 0) {
+                    categoriesWithTimeList.add(category)
+                }
+            }
+            return categoriesWithTimeList.toList()
+        }
+
     init {
         for(i in 0..timerange) {
             val day= Day(startDay.plusDays(i.toLong()), context)
@@ -40,7 +55,8 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
     }
 
     fun createBarChart(barChart: BarChart) {
-        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(), getCategoryColours())
+        val barCategories = allCategories
+        CustomBarChart(barChart, generateBarEntries(), getCategoryLabels(barCategories), getCategoryColours(barCategories))
     }
 
     fun createPieChart(pieChart: PieChart) {
@@ -49,16 +65,15 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
         val prefix = if(endDay == LocalDate.now()) "Last " else ""
 
         val pieChartTitle = "$prefix $dayNumber days"
-        val pieChartSubtitle = "${this.getFirstDay()} - ${this.getLastDay()}"
-        CustomPieChart(pieChart, generatePieEntries(), getCategoryLabels(), getCategoryColours(), pieChartTitle, pieChartSubtitle)
+        val pieChartSubtitle = "${this.getFirstDayFormatted()} - ${this.getLastDayFormatted()}"
+        CustomPieChart(pieChart, generatePieEntries(), getCategoryLabels(categoriesWithTime), getCategoryColours(categoriesWithTime), pieChartTitle, pieChartSubtitle)
     }
 
     private fun generatePieEntries(): Array<Double> {
-        val entriesByCategory = Array(allCategories.size){0.0}
+        val entriesByCategory = Array(categoriesWithTime.size){0.0}
 
-        for (categoryIndex in allCategories.indices) {
-            println(categoryIndex)
-            entriesByCategory[categoryIndex] = timePerCategory(allCategories[categoryIndex].id)
+        for (categoryIndex in categoriesWithTime.indices) {
+            entriesByCategory[categoryIndex] = timePerCategory(categoriesWithTime[categoryIndex].id)
         }
 
         return entriesByCategory
@@ -79,30 +94,30 @@ class Timerange(private var startDay: LocalDate, private var timerange: Int, pri
         return entries
     }
 
-    private fun getCategoryLabels(): Array<String> {
-        val categoryLabelsArray = Array(allCategories.size) { "undefined" }
+    private fun getCategoryLabels(categories : List<Category>): Array<String> {
+        val categoryLabelsArray = Array(categories.size) { "undefined" }
 
-        for (categoryIndex in allCategories.indices) {
-            categoryLabelsArray[categoryIndex] = allCategories[categoryIndex].name
+        for (categoryIndex in categories.indices) {
+            categoryLabelsArray[categoryIndex] = categories[categoryIndex].name
         }
         return categoryLabelsArray
     }
 
-    private fun getCategoryColours(): Array<Int> {
-        val categoryColorsArray = Array(allCategories.size) { 0 }
+    private fun getCategoryColours(categories: List<Category>): Array<Int> {
+        val categoryColorsArray = Array(categories.size) { 0 }
 
-        for (categoryIndex in allCategories.indices) {
-            categoryColorsArray[categoryIndex] = Color.parseColor(allCategories[categoryIndex].colour)
+        for (categoryIndex in categories.indices) {
+            categoryColorsArray[categoryIndex] = Color.parseColor(categories[categoryIndex].colour)
         }
         return categoryColorsArray
     }
 
-    fun getLastDay(): String {
+    fun getLastDayFormatted(): String {
         val formatter = DateTimeFormatter.ofPattern("dd.MM")
         return formatter.format(startDay.plusDays(timerange.toLong()))
     }
 
-    fun getFirstDay(): String {
+    fun getFirstDayFormatted(): String {
         val formatter = DateTimeFormatter.ofPattern("dd.MM")
         return formatter.format(startDay)
     }
